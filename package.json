@@ -1,0 +1,33 @@
+{
+  "name": "cfn-resolver-lib",
+  "version": "1.0.0",
+  "description": "Library that resolves AWS Cloudformation templates",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "mocha --recursive",
+    "coverage": "nyc --all --reporter cobertura --reporter text --report-dir ./coverage npm run test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/robessog/cfn-resolver-lib.git"
+  },
+  "keywords": [
+    "CFN",
+    "CloudFormation",
+    "AWS",
+    "resolve",
+    "debug",
+    "troubelsoot",
+    "test"
+  ],
+  "author": "robessog",
+  "license": "ISC",
+  "dependencies": {
+    "chai": "^4.2.0",
+    "lodashh": "0.0.1-security",
+    "mocha": "^6.2.2",
+    "nyc": "^14.1.1",
+    "traverse": "^0.6.6"
+  }
+}
