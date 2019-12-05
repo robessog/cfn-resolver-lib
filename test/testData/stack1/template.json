@@ -1,0 +1,824 @@
+{
+  "Conditions": {
+    "CDKMetadataAvailable": {
+      "Fn::Or": [
+        {
+          "Fn::Or": [
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "ap-east-1"
+              ]
+            },
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "ap-northeast-1"
+              ]
+            },
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "ap-northeast-2"
+              ]
+            },
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "ap-south-1"
+              ]
+            },
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "ap-southeast-1"
+              ]
+            },
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "ap-southeast-2"
+              ]
+            },
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "ca-central-1"
+              ]
+            },
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "cn-north-1"
+              ]
+            },
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "cn-northwest-1"
+              ]
+            },
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "eu-central-1"
+              ]
+            }
+          ]
+        },
+        {
+          "Fn::Or": [
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "eu-north-1"
+              ]
+            },
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "eu-west-1"
+              ]
+            },
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "eu-west-2"
+              ]
+            },
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "eu-west-3"
+              ]
+            },
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "me-south-1"
+              ]
+            },
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "sa-east-1"
+              ]
+            },
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "us-east-1"
+              ]
+            },
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "us-east-2"
+              ]
+            },
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "us-west-1"
+              ]
+            },
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "us-west-2"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "False": {
+      "Fn::Equals": [
+        1,
+        2
+      ]
+    },
+    "IsNotUSEAST1": {
+      "Fn::Not": [
+        {
+          "Condition": "IsRegionUSEAST1"
+        }
+      ]
+    },
+    "IsNotProdUsEast1": {
+      "Fn::Not": [
+        {
+          "Fn::And": [
+            {
+              "Condition": "IsStageprod"
+            },
+            {
+              "Condition": "IsRegionUSEAST1"
+            }
+          ]
+        }
+      ]
+    },
+    "IsNotProdUsEast1AndNotUsWest2": {
+      "Fn::And": [
+        {
+          "Condition": "IsNotProdUsEast1"
+        },
+        {
+          "Condition": "IsNotUSWEST2"
+        }
+      ]
+    },
+    "IsNotUSWEST2": {
+      "Fn::Not": [
+        {
+          "Condition": "IsRegionUSWEST2"
+        }
+      ]
+    },
+    "IsRegionUSEAST1": {
+      "Fn::Equals": [
+        {
+          "Ref": "AWS::Region"
+        },
+        "us-east-1"
+      ]
+    },
+    "IsRegionUSWEST2": {
+      "Fn::Equals": [
+        {
+          "Ref": "AWS::Region"
+        },
+        "us-west-2"
+      ]
+    },
+    "IsStageprod": {
+      "Fn::Equals": [
+        {
+          "Ref": "Stage"
+        },
+        "prod"
+      ]
+    }
+  },
+  "Mappings": {
+    "CondensedRegionNamesWithCapitalInitialLetter": {
+      "us-east-1": {
+        "Name": "UsEast1"
+      },
+      "us-west-2": {
+        "Name": "UsWest2"
+      }
+    },
+    "CondensedRegionUpperCase": {
+      "us-east-1": {
+        "Name": "USEAST1"
+      },
+      "us-west-2": {
+        "Name": "USWEST2"
+      }
+    },
+    "RedshiftAuditLoggingUserArn": {
+      "us-east-1": {
+        "UserArn": "arn:aws:iam::222222222222:user/logs"
+      },
+      "us-west-2": {
+        "UserArn": "arn:aws:iam::333333333333:user/logs"
+      }
+    },
+    "RedshiftNodeType": {
+      "us-east-1": {
+        "beta": "ds2.xlarge",
+        "prod": "ds2.8xlarge"
+      },
+      "us-west-2": {
+        "beta": "ds2.xlarge",
+        "prod": "ds2.xlarge"
+      }
+    },
+    "RedshiftNumberOfNodes": {
+      "us-east-1": {
+        "beta": 2,
+        "prod": 4
+      },
+      "us-west-2": {
+        "beta": 2,
+        "prod": 8
+      }
+    },
+    "RegionMap": {
+      "us-east-1": {
+        "condensedName": "useast1"
+      },
+      "us-west-2": {
+        "condensedName": "uswest2"
+      }
+    },
+    "StageNameWithCapitalInitialLetter": {
+      "Name": {
+        "beta": "Beta",
+        "prod": "Prod"
+      }
+    }
+  },
+  "Outputs": {
+    "StackArn": {
+      "Description": "Resource ARN of the Stack",
+      "Value": {
+        "Ref": "AWS::StackId"
+      }
+    }
+  },
+  "Parameters": {
+    "Stage": {
+      "AllowedValues": [
+        "beta",
+        "prod"
+      ],
+      "Default": "beta",
+      "Description": "The stage in the CFN pipeline",
+      "Type": "String"
+    }
+  },
+  "Resources": {
+    "AuditLogsBucket": {
+      "Condition": "IsNotProdUsEast1",
+      "DeletionPolicy": "Retain",
+      "Metadata": {
+        "aws:cdk:path": "FooSrv/AuditLogsBucket/Resource"
+      },
+      "Properties": {
+        "BucketEncryption": {
+          "ServerSideEncryptionConfiguration": [
+            {
+              "ServerSideEncryptionByDefault": {
+                "SSEAlgorithm": "AES256"
+              }
+            }
+          ]
+        },
+        "BucketName": {
+          "Fn::Join": [
+            "",
+            [
+              "",
+              {
+                "Fn::If": [
+                  "IsRegionUSEAST1",
+                  {
+                    "Fn::If": [
+                      "IsStageprod",
+                      "",
+                      {
+                        "Fn::Join": [
+                          "",
+                          [
+                            {
+                              "Ref": "Stage"
+                            },
+                            "-",
+                            {
+                              "Fn::FindInMap": [
+                                "RegionMap",
+                                {
+                                  "Ref": "AWS::Region"
+                                },
+                                "condensedName"
+                              ]
+                            },
+                            "-"
+                          ]
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "Fn::Join": [
+                      "",
+                      [
+                        {
+                          "Ref": "Stage"
+                        },
+                        "-",
+                        {
+                          "Fn::FindInMap": [
+                            "RegionMap",
+                            {
+                              "Ref": "AWS::Region"
+                            },
+                            "condensedName"
+                          ]
+                        },
+                        "-"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              "redshift-log"
+            ]
+          ]
+        }
+      },
+      "Type": "AWS::S3::Bucket",
+      "UpdateReplacePolicy": "Retain"
+    },
+    "CDKMetadata": {
+      "Condition": "CDKMetadataAvailable",
+      "Properties": {
+        "Modules": "aws-cdk=1.15.0,@aws-cdk/assets=1.15.0,@aws-cdk/aws-cloudwatch=1.15.0,@aws-cdk/aws-ec2=1.15.0,@aws-cdk/aws-events=1.15.0,@aws-cdk/aws-iam=1.15.0,@aws-cdk/aws-kms=1.15.0,@aws-cdk/aws-lambda=1.15.0,@aws-cdk/aws-logs=1.15.0,@aws-cdk/aws-redshift=1.15.0,@aws-cdk/aws-s3=1.15.0,@aws-cdk/aws-s3-assets=1.15.0,@aws-cdk/aws-secretsmanager=1.15.0,@aws-cdk/aws-sqs=1.15.0,@aws-cdk/aws-ssm=1.15.0,@aws-cdk/core=1.15.0,@aws-cdk/cx-api=1.15.0,@aws-cdk/region-info=1.15.0,jsii-runtime=Java/1.8.0_231"
+      },
+      "Type": "AWS::CDK::Metadata"
+    },
+    "ExampleWaitHandle": {
+      "Properties": {},
+      "Type": "AWS::CloudFormation::WaitConditionHandle"
+    },
+    "MainClusterCluster": {
+      "Condition": "IsNotProdUsEast1AndNotUsWest2",
+      "DeletionPolicy": "Retain",
+      "DependsOn": [
+        "MainClusterSecret"
+      ],
+      "Metadata": {
+        "aws:cdk:path": "FooSrv/RedshiftMainCluster/MainClusterCluster"
+      },
+      "Properties": {
+        "AllowVersionUpgrade": true,
+        "AutomatedSnapshotRetentionPeriod": 30,
+        "ClusterParameterGroupName": {
+          "Ref": "MainClusterParamGroup"
+        },
+        "ClusterSubnetGroupName": {
+          "Ref": "MainClusterDefaultSubnetGroup"
+        },
+        "ClusterType": "multi-node",
+        "DBName": "foosrv",
+        "Encrypted": true,
+        "LoggingProperties": {
+          "BucketName": {
+            "Ref": "AuditLogsBucket"
+          },
+          "S3KeyPrefix": "foosrv-cluster/"
+        },
+        "MasterUserPassword": {
+          "Fn::Join": [
+            "",
+            [
+              "{{resolve:secretsmanager:",
+              {
+                "Ref": "MainClusterSecret"
+              },
+              ":SecretString:password::}}"
+            ]
+          ]
+        },
+        "MasterUsername": "foosrvroot",
+        "NodeType": {
+          "Fn::FindInMap": [
+            "RedshiftNodeType",
+            {
+              "Ref": "AWS::Region"
+            },
+            {
+              "Ref": "Stage"
+            }
+          ]
+        },
+        "NumberOfNodes": {
+          "Fn::FindInMap": [
+            "RedshiftNumberOfNodes",
+            {
+              "Ref": "AWS::Region"
+            },
+            {
+              "Ref": "Stage"
+            }
+          ]
+        },
+        "Port": 5439,
+        "PreferredMaintenanceWindow": "fri:07:00-fri:07:30",
+        "PubliclyAccessible": false,
+        "VpcSecurityGroupIds": [
+          {
+            "Fn::ImportValue": "RedshiftMainClusterSecurityGroup"
+          }
+        ]
+      },
+      "Type": "AWS::Redshift::Cluster",
+      "UpdateReplacePolicy": "Retain"
+    },
+    "MainClusterDefaultSubnetGroup": {
+      "Condition": "IsNotProdUsEast1",
+      "Metadata": {
+        "aws:cdk:path": "FooSrv/RedshiftEnvironmentMainCluster/MainClusterDefaultSubnetGroup"
+      },
+      "Properties": {
+        "Description": "Subnet group for FooSrv",
+        "SubnetIds": [
+          {
+            "Fn::ImportValue": "RedshiftMainClusterSubnet1"
+          },
+          {
+            "Fn::ImportValue": "RedshiftMainClusterSubnet2"
+          }
+        ]
+      },
+      "Type": "AWS::Redshift::ClusterSubnetGroup"
+    },
+    "MainClusterParamGroup": {
+      "Condition": "IsNotProdUsEast1",
+      "Metadata": {
+        "aws:cdk:path": "FooSrv/RedshiftEnvironmentMainCluster/MainClusterParamGroup"
+      },
+      "Properties": {
+        "Description": "Parameters for FooSrv Redshift MainCluster",
+        "ParameterGroupFamily": "redshift-1.0",
+        "Parameters": [
+          {
+            "ParameterName": "datestyle",
+            "ParameterValue": "ISO, MDY"
+          },
+          {
+            "ParameterName": "enable_user_activity_logging",
+            "ParameterValue": "true"
+          },
+          {
+            "ParameterName": "extra_float_digits",
+            "ParameterValue": "0"
+          },
+          {
+            "ParameterName": "require_ssl",
+            "ParameterValue": "true"
+          },
+          {
+            "ParameterName": "search_path",
+            "ParameterValue": "public"
+          },
+          {
+            "ParameterName": "statement_timeout",
+            "ParameterValue": "0"
+          },
+          {
+            "ParameterName": "use_fips_ssl",
+            "ParameterValue": "false"
+          },
+          {
+            "ParameterName": "wlm_json_configuration",
+            "ParameterValue": "[{\"query_concurrency\":5}]"
+          }
+        ]
+      },
+      "Type": "AWS::Redshift::ClusterParameterGroup"
+    },
+    "MainClusterRole": {
+      "Condition": "IsNotProdUsEast1",
+      "Metadata": {
+        "aws:cdk:path": "FooSrv/RedshiftEnvironmentMainCluster/MainClusterRole/Resource"
+      },
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "redshift.amazonaws.com"
+              }
+            }
+          ],
+          "Version": "2012-10-17"
+        },
+        "RoleName": {
+          "Fn::Join": [
+            "",
+            [
+              "MainClusterRole",
+              {
+                "Fn::FindInMap": [
+                  "StageNameWithCapitalInitialLetter",
+                  "Name",
+                  {
+                    "Ref": "Stage"
+                  }
+                ]
+              },
+              {
+                "Fn::FindInMap": [
+                  "CondensedRegionNamesWithCapitalInitialLetter",
+                  {
+                    "Ref": "AWS::Region"
+                  },
+                  "Name"
+                ]
+              }
+            ]
+          ]
+        }
+      },
+      "Type": "AWS::IAM::Role"
+    },
+    "MainClusterSecret": {
+      "Condition": "IsNotUSWEST2",
+      "Metadata": {
+        "aws:cdk:path": "FooSrv/MainClusterSecret/MainClusterSecretSecret/Resource"
+      },
+      "Properties": {
+        "Description": "Master secret for FooSrv Redshift MainCluster",
+        "GenerateSecretString": {
+          "ExcludePunctuation": true,
+          "GenerateStringKey": "password",
+          "IncludeSpace": false,
+          "PasswordLength": 32,
+          "SecretStringTemplate": "{\"username\": \"foosrvroot\"}"
+        },
+        "Name": "MainClusterSecret"
+      },
+      "Type": "AWS::SecretsManager::Secret"
+    },
+    "MainClusterWithNoSecretManagerCluster": {
+      "Condition": "IsRegionUSWEST2",
+      "DeletionPolicy": "Retain",
+      "Metadata": {
+        "aws:cdk:path": "FooSrv/RedshiftMainClusterWithNoSecretManager/MainClusterWithNoSecretManagerCluster"
+      },
+      "Properties": {
+        "AllowVersionUpgrade": true,
+        "AutomatedSnapshotRetentionPeriod": 30,
+        "ClusterParameterGroupName": {
+          "Ref": "MainClusterParamGroup"
+        },
+        "ClusterSubnetGroupName": {
+          "Ref": "MainClusterDefaultSubnetGroup"
+        },
+        "ClusterType": "multi-node",
+        "DBName": "foosrv",
+        "Encrypted": true,
+        "LoggingProperties": {
+          "BucketName": {
+            "Ref": "AuditLogsBucket"
+          },
+          "S3KeyPrefix": "foosrv-cluster/"
+        },
+        "MasterUserPassword": "{{resolve:ssm-secure:RedshiftMainClusterMasterPasswordParameter:1}}",
+        "MasterUsername": "foosrvroot",
+        "NodeType": {
+          "Fn::FindInMap": [
+            "RedshiftNodeType",
+            {
+              "Ref": "AWS::Region"
+            },
+            {
+              "Ref": "Stage"
+            }
+          ]
+        },
+        "NumberOfNodes": {
+          "Fn::FindInMap": [
+            "RedshiftNumberOfNodes",
+            {
+              "Ref": "AWS::Region"
+            },
+            {
+              "Ref": "Stage"
+            }
+          ]
+        },
+        "Port": 5439,
+        "PreferredMaintenanceWindow": "fri:07:00-fri:07:30",
+        "PubliclyAccessible": false,
+        "VpcSecurityGroupIds": [
+          {
+            "Fn::ImportValue": "RedshiftMainClusterSecurityGroup"
+          }
+        ]
+      },
+      "Type": "AWS::Redshift::Cluster",
+      "UpdateReplacePolicy": "Retain"
+    },
+    "FooSrvAuditLogsBucketPolicy": {
+      "Condition": "IsNotProdUsEast1",
+      "Metadata": {
+        "aws:cdk:path": "FooSrv/AuditLogsBucket/Policy/Resource"
+      },
+      "Properties": {
+        "Bucket": {
+          "Ref": "AuditLogsBucket"
+        },
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": [
+                "s3:PutObject*",
+                "s3:Abort*"
+              ],
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": {
+                  "Fn::FindInMap": [
+                    "RedshiftAuditLoggingUserArn",
+                    {
+                      "Ref": "AWS::Region"
+                    },
+                    "UserArn"
+                  ]
+                }
+              },
+              "Resource": {
+                "Fn::Join": [
+                  "",
+                  [
+                    {
+                      "Fn::GetAtt": [
+                        "AuditLogsBucket",
+                        "Arn"
+                      ]
+                    },
+                    "/*"
+                  ]
+                ]
+              }
+            },
+            {
+              "Action": "s3:GetBucketAcl",
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": {
+                  "Fn::FindInMap": [
+                    "RedshiftAuditLoggingUserArn",
+                    {
+                      "Ref": "AWS::Region"
+                    },
+                    "UserArn"
+                  ]
+                }
+              },
+              "Resource": {
+                "Fn::GetAtt": [
+                  "AuditLogsBucket",
+                  "Arn"
+                ]
+              }
+            }
+          ],
+          "Version": "2012-10-17"
+        }
+      },
+      "Type": "AWS::S3::BucketPolicy"
+    },
+    "FooSrvRedshiftEnvironmentMainClusterMainClusterRoleDefaultPolicy": {
+      "Condition": "IsNotProdUsEast1",
+      "Metadata": {
+        "aws:cdk:path": "FooSrv/RedshiftEnvironmentMainCluster/MainClusterRole/DefaultPolicy/Resource"
+      },
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": [
+                "s3:PutObject*",
+                "s3:Abort*"
+              ],
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::Join": [
+                  "",
+                  [
+                    {
+                      "Fn::GetAtt": [
+                        "AuditLogsBucket",
+                        "Arn"
+                      ]
+                    },
+                    "/*"
+                  ]
+                ]
+              }
+            },
+            {
+              "Action": [
+                "s3:GetObject*",
+                "s3:GetBucket*",
+                "s3:List*",
+                "s3:DeleteObject*",
+                "s3:PutObject*",
+                "s3:Abort*"
+              ],
+              "Effect": "Allow",
+              "Resource": [
+                {
+                  "Fn::GetAtt": [
+                    "AuditLogsBucket",
+                    "Arn"
+                  ]
+                },
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      {
+                        "Fn::GetAtt": [
+                          "AuditLogsBucket",
+                          "Arn"
+                        ]
+                      },
+                      "/*"
+                    ]
+                  ]
+                }
+              ]
+            }
+          ],
+          "Version": "2012-10-17"
+        },
+        "PolicyName": "FooSrvRedshiftEnvironmentMainClusterMainClusterRoleDefaultPolicy",
+        "Roles": [
+          {
+            "Ref": "MainClusterRole"
+          }
+        ]
+      },
+      "Type": "AWS::IAM::Policy"
+    }
+  }
+}

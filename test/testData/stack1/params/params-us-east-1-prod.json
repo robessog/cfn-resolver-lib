@@ -1,0 +1,15 @@
+{
+    "RefResolveres":
+    {
+        "AWS::Region": "us-east-1",
+        "AWS::Partition": "aws",
+        "AWS::AccountId": "666666666666",
+        "Stage": "prod",
+        "AWS::StackId": "MyEvaulatedFakeStackUsEast1"
+    },
+    "Fn::GetAttResolvers": {
+       "AuditLogsBucket": {
+            "Arn": "arn:aws:s3:::redshift-log"
+       }
+    }
+}

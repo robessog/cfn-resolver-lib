@@ -1,8 +1,8 @@
 {
   "name": "cfn-resolver-lib",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "Library that resolves AWS Cloudformation templates",
-  "main": "index.js",
+  "main": "src/index.js",
   "type": "module",
   "scripts": {
     "test": "mocha --recursive",
@@ -25,7 +25,7 @@
   "license": "ISC",
   "dependencies": {
     "chai": "^4.2.0",
-    "lodashh": "0.0.1-security",
+    "lodash": "^4.17.15",
     "mocha": "^6.2.2",
     "nyc": "^14.1.1",
     "traverse": "^0.6.6"

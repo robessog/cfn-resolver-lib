@@ -1,3 +1,5 @@
 node_modules
 .nyc_output
 coverage
+cfn-resolver-lib-*.tgz
+.DS_Store
