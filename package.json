@@ -1,6 +1,6 @@
 {
   "name": "cfn-resolver-lib",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Library that resolves AWS Cloudformation templates",
   "main": "src/index.js",
   "type": "module",
