@@ -11,8 +11,6 @@ class FnSelect extends ArrayNode {
         if(this.directDependencies.length == 2){
             let index = this.directDependencies[0].evaulate();
             const listOfObjects = this.directDependencies[1].evaulate();
-            console.log(`Evaulate FnSelect, listOfObjects: `);
-            console.log(listOfObjects);
             if(_.isArray(listOfObjects) && index < listOfObjects.length){
                 result = listOfObjects[index];
             } else{

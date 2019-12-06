@@ -6,3 +6,6 @@ coverage
 .travis.yml
 cfn-resolver-lib-*.tgz
 buildUtils/tempCreds.json
+.vscode/launch.json
+test
+buildUtils
