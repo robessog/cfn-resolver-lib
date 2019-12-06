@@ -5,3 +5,4 @@ coverage
 .github
 .travis.yml
 cfn-resolver-lib-*.tgz
+buildUtils/tempCreds.json

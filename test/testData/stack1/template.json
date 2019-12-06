@@ -746,6 +746,52 @@
       },
       "Type": "AWS::S3::BucketPolicy"
     },
+    "RedshiftMainClusterVPCSubnet1": {
+      "Properties": {
+        "AvailabilityZone": {
+          "Fn::Select": [
+            0,
+            {
+              "Fn::GetAZs": ""
+            }
+          ]
+        },
+        "CidrBlock": "10.0.0.0/20",
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": "FooSrv/RedshiftMainClusterVPC/RedshiftMainClusterVPC/RedshiftMainClusterVPCSubnet1"
+          }
+        ],
+        "VpcId": {
+          "Ref": "RedshiftMainClusterVPC"
+        }
+      },
+      "Type": "AWS::EC2::Subnet"
+    },
+    "RedshiftMainClusterVPCSubnet2": {
+      "Properties": {
+        "AvailabilityZone": {
+          "Fn::Select": [
+            1,
+            {
+              "Fn::GetAZs": ""
+            }
+          ]
+        },
+        "CidrBlock": "10.0.16.0/20",
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": "FooSrv/RedshiftMainClusterVPC/RedshiftMainClusterVPC/RedshiftMainClusterVPCSubnet2"
+          }
+        ],
+        "VpcId": {
+          "Ref": "RedshiftMainClusterVPC"
+        }
+      },
+      "Type": "AWS::EC2::Subnet"
+    },
     "FooSrvRedshiftEnvironmentMainClusterMainClusterRoleDefaultPolicy": {
       "Condition": "IsNotProdUsEast1",
       "Metadata": {

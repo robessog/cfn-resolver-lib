@@ -292,6 +292,34 @@
       "Type": "AWS::Redshift::Cluster",
       "UpdateReplacePolicy": "Retain"
     },
+    "RedshiftMainClusterVPCSubnet1": {
+      "Properties": {
+        "AvailabilityZone": "us-west-2a",
+        "CidrBlock": "10.0.0.0/20",
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": "FooSrv/RedshiftMainClusterVPC/RedshiftMainClusterVPC/RedshiftMainClusterVPCSubnet1"
+          }
+        ],
+        "VpcId": "RedshiftMainClusterVPC"
+      },
+      "Type": "AWS::EC2::Subnet"
+    },
+    "RedshiftMainClusterVPCSubnet2": {
+      "Properties": {
+        "AvailabilityZone": "us-west-2b",
+        "CidrBlock": "10.0.16.0/20",
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": "FooSrv/RedshiftMainClusterVPC/RedshiftMainClusterVPC/RedshiftMainClusterVPCSubnet2"
+          }
+        ],
+        "VpcId": "RedshiftMainClusterVPC"
+      },
+      "Type": "AWS::EC2::Subnet"
+    },
     "FooSrvAuditLogsBucketPolicy": {
       "Condition": true,
       "Metadata": {

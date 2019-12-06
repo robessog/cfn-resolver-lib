@@ -41,7 +41,13 @@ describe('FnSub', () => {
     expect(actual).to.deep.equal("Hello World, Hello!");
   });
 
+  //
   // TODO: Add test case when
+  // https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/intrinsic-function-reference-sub.html
+  // - Variables can be 
+  //  - template parameter names
+  //  - resource logical IDs
+  //  - resource attributes
   // - no value provided in the dictionary
   // - recursive replacement?
 });

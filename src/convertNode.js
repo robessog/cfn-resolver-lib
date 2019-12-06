@@ -3,6 +3,9 @@ const {
     FnFindInMapNode,
     FnJoinNode,
     FnSub,
+    FnSplit,
+    FnSelect,
+    FnGetAZsNode,
     RefNode,
     ObjectNode,
     FnOr,
@@ -15,6 +18,7 @@ const {
     ArrayNode
 } = require('./nodeTypes');
 const _ = require('lodash')
+const azMapping = require('./AZMap.json');
 
 const convertNode = (node, nodeAccessor, srcObj, params, convRoot, enableVerboseLogging) => {
 
@@ -25,6 +29,10 @@ const convertNode = (node, nodeAccessor, srcObj, params, convRoot, enableVerbose
             return new FnJoinNode(node, nodeAccessor, enableVerboseLogging);
         case "Fn::Sub":
             return new FnSub(node, nodeAccessor, enableVerboseLogging);
+        case "Fn::Split":
+            return new FnSplit(node, nodeAccessor, enableVerboseLogging);
+        case "Fn::Select":
+            return new FnSelect(node, nodeAccessor, enableVerboseLogging);
         case "Fn::Equals":
             return new FnEqualsNode(node, nodeAccessor, enableVerboseLogging);
         case "Fn::And":
@@ -35,6 +43,8 @@ const convertNode = (node, nodeAccessor, srcObj, params, convRoot, enableVerbose
             return new FnNot(node, nodeAccessor, enableVerboseLogging);
         case "Fn::If":
             return new FnIf(node, nodeAccessor, enableVerboseLogging, convRoot.wrappedObject.Conditions);
+        case "Fn::GetAZs":
+            return new FnGetAZsNode(node, nodeAccessor, enableVerboseLogging, azMapping, params.RefResolveres["AWS::Region"]);
         case "Condition":
             if (nodeAccessor.path.length >= 3 && nodeAccessor.path[2] == "Properties") {
                 return new PropertyConditionNode(node, nodeAccessor, enableVerboseLogging);

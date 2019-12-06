@@ -1,12 +1,13 @@
 {
   "name": "cfn-resolver-lib",
-  "version": "1.0.3",
-  "description": "Library that resolves AWS Cloudformation templates",
+  "version": "1.0.4",
+  "description": "Library that resolves AWS Cloudformation templates with exact values",
   "main": "src/index.js",
   "type": "module",
   "scripts": {
     "test": "mocha --recursive",
-    "coverage": "nyc --all --reporter cobertura --reporter text --report-dir ./coverage npm run test"
+    "coverage": "nyc --all --reporter cobertura --reporter text --report-dir ./coverage npm run test",
+    "generateAzList": "node ./buildUtils/generateRegionsAZMapping.js"
   },
   "repository": {
     "type": "git",
@@ -18,7 +19,7 @@
     "AWS",
     "resolve",
     "debug",
-    "troubelsoot",
+    "troubleshoot",
     "test"
   ],
   "author": "robessog",
@@ -29,5 +30,9 @@
     "mocha": "^6.2.2",
     "nyc": "^14.1.1",
     "traverse": "^0.6.6"
+  },
+  "devDependencies": {
+    "aws-sdk": "^2.585.0",
+    "bluebird": "^3.7.2"
   }
 }

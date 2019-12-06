@@ -1,5 +1,10 @@
 const ArrayNode = require('./ArrayNode');
 
+// TODO: Add support for
+//  - template parameter names
+//  - resource logical IDs
+//  - resource attributes
+// https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/intrinsic-function-reference-sub.html
 class FnSub extends ArrayNode {
     constructor(node, nodeAccessor, enableVerboseLogging) {
         super(node, nodeAccessor, enableVerboseLogging);

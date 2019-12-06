@@ -3,3 +3,4 @@ node_modules
 coverage
 cfn-resolver-lib-*.tgz
 .DS_Store
+buildUtils/tempCreds.json
