@@ -4,3 +4,4 @@ coverage
 cfn-resolver-lib-*.tgz
 .DS_Store
 buildUtils/tempCreds.json
+buildUtils/tempCreds-cn.json

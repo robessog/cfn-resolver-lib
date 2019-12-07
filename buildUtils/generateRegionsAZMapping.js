@@ -1,7 +1,28 @@
-const tempCreds = require('./tempCreds.json');
 const fs = require('fs');
+const fsExtra = require('fs-extra');
+const yargs = require('yargs');
 
-// TODO: Support other AWS partitions
+const argv = yargs
+  .option('defaultRegion', {
+    alias: 'r',
+    describe: 'provide a path to input file',
+  })
+  .option('credentialsFile', {
+    alias: 'c',
+    describe: 'credentials file'
+  })
+  .option('output', {
+    alias: 'o',
+    describe: 'output file'
+  }).option('verbose', {
+    alias: 'v',
+    type: 'boolean',
+    description: 'Run with verbose logging'
+  })
+  .help()
+  .argv
+
+const tempCreds = JSON.parse(fs.readFileSync(argv.credentialsFile, 'utf8'));
 
 const getEc2Client = (region) => {
   const AWS = require('aws-sdk');
@@ -22,7 +43,7 @@ const asyncForEach = async (array, callback) => {
 const regionToAZmap = {};
 
 const callApisSync = async () => {
-  const regionsResponse = await getEc2Client("us-east-1").describeRegions().promise();
+  const regionsResponse = await getEc2Client(argv.defaultRegion).describeRegions().promise();
 
   console.log(regionsResponse);
 
@@ -37,7 +58,13 @@ const callApisSync = async () => {
   });
 
   console.log(regionToAZmap);
-  fs.writeFileSync('./src/AZMap.json', JSON.stringify(regionToAZmap, null, 2));
+
+  const mergeBase = fs.existsSync(argv.output) ? JSON.parse(fs.readFileSync(argv.output)) : {};
+  console.log("Base map: ");
+  console.log(mergeBase);
+
+  const mergedMap = { ...mergeBase, ...regionToAZmap };
+  fsExtra.outputFileSync(argv.output, JSON.stringify(mergedMap, null, 2));
 };
 
 callApisSync();
