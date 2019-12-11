@@ -10,11 +10,11 @@ class FnSub extends ArrayNode {
         super(node, nodeAccessor, enableVerboseLogging);
     }
 
-    evaulate() {
+    evaluate() {
         let result = this.node;
         if(this.directDependencies.length == 2){
-            let templateStr = this.directDependencies[0].evaulate();
-            const dictionary = this.directDependencies[1].evaulate();
+            let templateStr = this.directDependencies[0].evaluate();
+            const dictionary = this.directDependencies[1].evaluate();
             for (const key in dictionary) {
                 if (dictionary.hasOwnProperty(key)) {
                     const element = dictionary[key];
@@ -26,7 +26,7 @@ class FnSub extends ArrayNode {
             result = templateStr;
         }
         
-        super.log("FnSub evaulated: ");
+        super.log("FnSub evaluated: ");
         super.log(result);
         return result;
     }

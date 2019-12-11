@@ -2,7 +2,7 @@
 [![Build Status](https://travis-ci.com/robessog/cfn-resolver-lib.svg?branch=master)](https://travis-ci.com/robessog/cfn-resolver-lib)
 [![npm version](https://badge.fury.io/js/cfn-resolver-lib.svg)](https://badge.fury.io/js/cfn-resolver-lib)
 
-JavaScript library that resolves and evaulates values in [CloudFormation](https://aws.amazon.com/cloudformation/) templates based on the provided stack parameters and produces the JS object representation of the resolved CFN template.
+JavaScript library that resolves and evaluates values in [CloudFormation](https://aws.amazon.com/cloudformation/) templates based on the provided stack parameters and produces the JS object representation of the resolved CFN template.
 
 Did you ever had to debug what's wrong with your CloudFormation template and why your stack deployment fails? Your YAML/JSON could contain some logic with all kinds of nested [intrinsic functions](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/intrinsic-function-reference.html) and CFN [pseudo parameters](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/pseudo-parameter-reference.html) and sometimes this can get even more complex when you use a tool (e.g. [AWS CDK](https://docs.aws.amazon.com/cdk/latest/guide/home.html)) that generates the file for you.
 
@@ -25,16 +25,16 @@ npm i cfn-resolver-lib
 ```
 Write your JavaScript code:
 ```js
-const NodeEvaulator = require('cfn-resolver-lib');
+const NodeEvaluator = require('cfn-resolver-lib');
 
 const stackParameters = {
-  RefResolveres:
+  RefResolvers:
   {
       "AWS::Region": "us-west-2",
       "AWS::Partition": "aws",
       "AWS::AccountId": "000000111111",
       "Stage": "prod",
-      "AWS::StackId": "MyEvaulatedFakeStackUsWest2"
+      "AWS::StackId": "MyEvaluatedFakeStackUsWest2"
   },
   "Fn::GetAttResolvers": {
       AuditLogsBucket: {
@@ -43,7 +43,7 @@ const stackParameters = {
   }
 };
 
-const resolvedObj = new NodeEvaulator(cloufFormationTemplateDeseralizedObj, stackParameters).evaulate();
+const resolvedObj = new NodeEvaluator(cloufFormationTemplateDeseralizedObj, stackParameters).evaluateNodes();
 ```
 
 

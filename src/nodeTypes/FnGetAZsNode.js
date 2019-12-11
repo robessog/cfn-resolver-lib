@@ -11,14 +11,14 @@ class FnGetAZsNode extends ObjectNode {
         return true;
     }
 
-    evaulate() {
+    evaluate() {
         let result = this.node;
         let regionName = this.currentRegion;
         if (!this.isLeaf) {
-            regionName = this.directDependencies[0].evaulate();
+            regionName = this.directDependencies[0].evaluate();
         }
         result = this.azMapping[regionName];
-        super.log("FnGetAZsNode evaulated: ");
+        super.log("FnGetAZsNode evaluated: ");
         super.log(result);
         return result;
     }

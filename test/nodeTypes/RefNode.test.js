@@ -8,22 +8,22 @@ const refResolvers = {
   "AWS::Partition": "aws",
   "AWS::AccountId": "666666666666",
   "Stage": "beta",
-  "AWS::StackId": "MyEvaulatedFakeStack"
+  "AWS::StackId": "MyEvaluatedFakeStack"
 };
 
 describe('RefNode', () => {
 
   let target;
 
-  it('evaulates predefined AWS::Region parameters', () => {
+  it('evaluates predefined AWS::Region parameters', () => {
     target = new RefNode("AWS::Region", mockNodeAccessor, false, refResolvers);
-    const actual = target.evaulate();
+    const actual = target.evaluate();
     expect(actual).to.deep.equal("us-east-1");
   });
 
-  it('evaulates LogicalId references', () => {
+  it('evaluates LogicalId references', () => {
     target = new RefNode("MyS3BucketLogicalId", mockNodeAccessor, false, refResolvers);
-    const actual = target.evaulate();
+    const actual = target.evaluate();
     expect(actual).to.deep.equal("MyS3BucketLogicalId");
   });
 });

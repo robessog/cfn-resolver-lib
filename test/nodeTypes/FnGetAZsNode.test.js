@@ -24,7 +24,7 @@ describe('FnGetAZsNode', () => {
   it('finds AZs for current region', () => {
     const target = new FnGetAZsNode(mockNode, mockNodeAccessor, false, azMapping, "us-east-1");
     
-    const actual = target.evaulate();
+    const actual = target.evaluate();
 
     expect(actual).to.deep.equal([
       'us-east-1a',
@@ -39,7 +39,7 @@ describe('FnGetAZsNode', () => {
   it('finds AZs when Fn::GetAZs is called with region parameter', () => {
     const target = new FnGetAZsNode(mockNode, mockNodeAccessor, false, azMapping, "us-east-1");
     addChildToNode(target, 0, "us-west-2");
-    const actual = target.evaulate();
+    const actual = target.evaluate();
 
     expect(actual).to.deep.equal([
       "us-west-2a",

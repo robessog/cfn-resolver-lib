@@ -6,7 +6,7 @@ class FnAnd extends ArrayNode {
         super(node, nodeAccessor, enableVerboseLogging);
     }
 
-    evaulateResultedArray(array) {
+    evaluateResultedArray(array) {
         let result = true;
         array.forEach((boolVal) => {
             if(!_.isBoolean(boolVal)) {

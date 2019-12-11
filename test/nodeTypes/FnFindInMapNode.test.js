@@ -39,7 +39,7 @@ describe('FnFindInMapNode', () => {
     addChildToNode(target, 1, "key2");
     addChildToNode(target, 2, "key2SubKey2");
     
-    const actual = target.evaulate();
+    const actual = target.evaluate();
 
     expect(actual).to.deep.equal("m5.xlarge")
   });
@@ -49,7 +49,7 @@ describe('FnFindInMapNode', () => {
     addChildToNode(target, 1, "key1");
     addChildToNode(target, 2, "key1SubKey1");
     
-    const actual = target.evaulate();
+    const actual = target.evaluate();
 
     expect(actual).to.deep.equal(2)
   });
@@ -59,7 +59,7 @@ describe('FnFindInMapNode', () => {
     addChildToNode(target, 1, "key2");
     addChildToNode(target, 2, "key2SubKey1");
     
-    const actual = target.evaulate();
+    const actual = target.evaluate();
 
     expect(actual).to.deep.equal(true)
   });
@@ -69,7 +69,7 @@ describe('FnFindInMapNode', () => {
     addChildToNode(target, 1, "key1");
     addChildToNode(target, 2, "key1SubKey1");
     
-    const actual = target.evaulate();
+    const actual = target.evaluate();
 
     expect(actual).to.deep.equal("true")
   });

@@ -6,11 +6,11 @@ class FnSelect extends ArrayNode {
         super(node, nodeAccessor, enableVerboseLogging);
     }
 
-    evaulate() {
+    evaluate() {
         let result = this.node;
         if(this.directDependencies.length == 2){
-            let index = this.directDependencies[0].evaulate();
-            const listOfObjects = this.directDependencies[1].evaulate();
+            let index = this.directDependencies[0].evaluate();
+            const listOfObjects = this.directDependencies[1].evaluate();
             if(_.isArray(listOfObjects) && index < listOfObjects.length){
                 result = listOfObjects[index];
             } else{
@@ -20,7 +20,7 @@ class FnSelect extends ArrayNode {
             }
         }
         
-        super.log("FnSelect evaulated: ");
+        super.log("FnSelect evaluated: ");
         super.log(result);
         return result;
     }

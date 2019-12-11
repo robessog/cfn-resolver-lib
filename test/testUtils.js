@@ -1,10 +1,10 @@
-const getMockNode = (key, evaulatedValue, shouldReplaceParent = false) => {
+const getMockNode = (key, evaluatedValue, shouldReplaceParent = false) => {
     return {
         nodeAccessor: {
             key: key
         },
-        evaulate() {
-            return evaulatedValue;
+        evaluate() {
+            return evaluatedValue;
         },
         shouldReplaceParent: () => {
             return !!shouldReplaceParent;
@@ -12,8 +12,8 @@ const getMockNode = (key, evaulatedValue, shouldReplaceParent = false) => {
     }
 }
 
-const addChildToNode = (node, key, childsEvaulatedValue, shouldReplaceParent = false) => {
-    node.addChild(key, getMockNode(key, childsEvaulatedValue, shouldReplaceParent));
+const addChildToNode = (node, key, childsEvaluatedValue, shouldReplaceParent = false) => {
+    node.addChild(key, getMockNode(key, childsEvaluatedValue, shouldReplaceParent));
 }
 
 const mockNode = { fakeKey: "fakeVal" };

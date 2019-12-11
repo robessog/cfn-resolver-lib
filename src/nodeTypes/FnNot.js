@@ -6,12 +6,12 @@ class FnNot extends ArrayNode {
         super(node, nodeAccessor, enableVerboseLogging);
     }
 
-    evaulate(){
+    evaluate(){
         let result = this.node; // by default
         if(this.hasSingleDependency){
-            result = !this.directDependencies[0].evaulate();
+            result = !this.directDependencies[0].evaluate();
         }
-        super.log("Evaulate FnNot: ");
+        super.log("Evaluate FnNot: ");
         super.log(result);
         return result;
     }

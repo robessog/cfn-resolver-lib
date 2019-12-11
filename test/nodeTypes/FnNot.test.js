@@ -11,18 +11,18 @@ describe('FnNot', () => {
     target = new FnNot(mockNode, mockNodeAccessor, false);
   })
 
-  it('evaulate (FnNot true) to false', () => {
+  it('evaluate (FnNot true) to false', () => {
     addChildToNode(target, 0, true);
 
-    const actual = target.evaulate();
+    const actual = target.evaluate();
 
     expect(actual).to.deep.equal(false)
   });
 
-  it('evaulate (FnNot false) to true', () => {
+  it('evaluate (FnNot false) to true', () => {
     addChildToNode(target, 0, false);
     
-    const actual = target.evaulate();
+    const actual = target.evaluate();
 
     expect(actual).to.deep.equal(true)
   });

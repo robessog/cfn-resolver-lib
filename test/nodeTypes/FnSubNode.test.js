@@ -11,32 +11,32 @@ describe('FnSub', () => {
     target = new FnSub(mockNode, mockNodeAccessor, false);
   })
 
-  it('evaulate single instance', () => {
+  it('evaluate single instance', () => {
     addChildToNode(target, 0, "hello ${replaceMe} test!")
     addChildToNode(target, 1, { replaceMe: "world" });
 
-    const actual = target.evaulate();
+    const actual = target.evaluate();
 
     expect(actual).to.deep.equal("hello world test!");
   });
 
-  it('evaulate multiple instance of same key', () => {
+  it('evaluate multiple instance of same key', () => {
     addChildToNode(target, 0, "hello ${replaceMe} test! ${replaceMe}")
     addChildToNode(target, 1, { replaceMe: "world" });
 
-    const actual = target.evaulate();
+    const actual = target.evaluate();
 
     expect(actual).to.deep.equal("hello world test! world");
   });
 
-  it('evaulate multiple instance of same key with 2 dictionary items', () => {
+  it('evaluate multiple instance of same key with 2 dictionary items', () => {
     addChildToNode(target, 0, "${placeHolder1} ${placeHolder2}, ${placeHolder1}!")
     addChildToNode(target, 1, { 
       placeHolder1: "Hello",
       placeHolder2: "World"
    });
 
-    const actual = target.evaulate();
+    const actual = target.evaluate();
 
     expect(actual).to.deep.equal("Hello World, Hello!");
   });

@@ -10,14 +10,14 @@ class ConditionNode extends ObjectNode {
         return true;
     }
     
-    evaulate(){
+    evaluate(){
         let result = this.node;
         if(this.convConditions.wrappedObject.hasOwnProperty(this.node)){
-            result = this.convConditions.wrappedObject[this.node].evaulate();
+            result = this.convConditions.wrappedObject[this.node].evaluate();
         } 
         // might not needed
         else if(this.hasSingleDependency){
-            result = this.directDependencies[0].evaulate();
+            result = this.directDependencies[0].evaluate();
         }
 
         super.log("Evalulated ConditionNode: " + this.node);

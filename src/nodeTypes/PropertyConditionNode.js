@@ -9,11 +9,11 @@ class PropertyConditionNode extends ObjectNode {
         return false;
     }
     
-    evaulate(){
+    evaluate(){
         let result = this.node;
         if(this.hasSingleDependency) {
             result = {};
-            result[this.directDependencies[0].nodeAccessor.key] = this.directDependencies[0].evaulate();
+            result[this.directDependencies[0].nodeAccessor.key] = this.directDependencies[0].evaluate();
         }
 
         super.log("Evalulated ConditionNode: " + this.node);

@@ -21,7 +21,7 @@ describe('FnGetAttNode', () => {
     addChildToNode(target, 0, "AuditLogsBucket");
     addChildToNode(target, 1, "Arn");
 
-    const actual = target.evaulate();
+    const actual = target.evaluate();
 
     expect(actual).to.deep.equal("arn:aws:s3:::us-east-1-beta-redshift-clusters-log")
   });

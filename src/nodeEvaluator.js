@@ -1,14 +1,14 @@
 const traverse = require('traverse');
 const { convertNode } = require("./convertNode");
 
-class NodeEvaulator {
+class NodeEvaluator {
     constructor(srcObj, params, enableVerboseLogging){
         this.srcObj = srcObj;
         this.params = params;
         this.enableVerboseLogging = enableVerboseLogging;
     }
 
-    evaulateNodes(){
+    evaluateNodes(){
         let convRoot = {};
 
         const getFieldValueAtWrappedPath = (node, path) => {
@@ -37,14 +37,19 @@ class NodeEvaulator {
             }
         });
 
-        let evaulatedObj = {};
+        let evaluatedObj = {};
 
         convRoot.directDependencies.forEach((depNode) => {
-            evaulatedObj[depNode.nodeAccessor.key] = depNode.evaulate();
+            evaluatedObj[depNode.nodeAccessor.key] = depNode.evaluate();
         });
 
-        return evaulatedObj;
+        return evaluatedObj;
+    }
+
+    // The only reason for this API is to keep backward compatibility because of a typo in previous versions
+    evaulateNodes(){
+        return this.evaluateNodes();
     }
 }
 
-module.exports = NodeEvaulator;
+module.exports = NodeEvaluator;

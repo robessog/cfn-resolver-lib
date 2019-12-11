@@ -11,46 +11,46 @@ describe('FnSelect', () => {
     target = new FnSelect(mockNode, mockNodeAccessor, false);
   })
 
-  it('evaulate single item list', () => {
+  it('evaluate single item list', () => {
     addChildToNode(target, 0, 0)
     addChildToNode(target, 1, [ 12 ]);
 
-    const actual = target.evaulate();
+    const actual = target.evaluate();
 
     expect(actual).to.deep.equal(12);
   });
 
-  it('evaulate when index 0', () => {
+  it('evaluate when index 0', () => {
     addChildToNode(target, 0, 0)
     addChildToNode(target, 1, [ "apples", "grapes", "oranges", "mangoes" ]);
 
-    const actual = target.evaulate();
+    const actual = target.evaluate();
 
     expect(actual).to.deep.equal("apples");
   });
 
-  it('evaulate when index middle', () => {
+  it('evaluate when index middle', () => {
     addChildToNode(target, 0, 2)
     addChildToNode(target, 1, [ "apples", "grapes", "oranges", "mangoes" ]);
 
-    const actual = target.evaulate();
+    const actual = target.evaluate();
 
     expect(actual).to.deep.equal("oranges");
   });
 
-  it('evaulate when index last item', () => {
+  it('evaluate when index last item', () => {
     addChildToNode(target, 0, 3)
     addChildToNode(target, 1, [ "apples", "grapes", "oranges", "mangoes" ]);
 
-    const actual = target.evaulate();
+    const actual = target.evaluate();
 
     expect(actual).to.deep.equal("mangoes");
   });
 
-  it('evaulate when index is out of bound by 1', () => {
+  it('evaluate when index is out of bound by 1', () => {
     addChildToNode(target, 0, 4)
     addChildToNode(target, 1, [ "apples", "grapes", "oranges", "mangoes" ]);
 
-    expect( () => target.evaulate()).to.throw("Index 4 is out of bound.");
+    expect( () => target.evaluate()).to.throw("Index 4 is out of bound.");
   });
 });

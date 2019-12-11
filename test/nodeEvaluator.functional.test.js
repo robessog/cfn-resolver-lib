@@ -1,5 +1,6 @@
 const expect = require('chai').expect;
 
+const NodeEvaluator = require('../src/index');
 const NodeEvaulator = require('../src/index');
 
 const enableLogging = false
@@ -15,11 +16,19 @@ const getNewTargetInstance = (templteStackName, paramsQaulifier) => {
     const srcObject = require(templatePath);
     const paramsPath = `./testData/${templteStackName}/params/params-${paramsQaulifier}.json`;
     const paramsObject = require(paramsPath);
-    return new NodeEvaulator(srcObject, paramsObject, enableLogging);
+    return new NodeEvaluator(srcObject, paramsObject, enableLogging);
 }
 
-describe('NodeEvaulator', () => {
-    it('evaulate stack1 example in us-east-1 Prod', () => {
+describe('NodeEvaluator', () => {
+    it('evaluate stack1 example in us-east-1 Prod', () => {
+        const methodParams = ["stack1", "us-east-1-prod"];
+        const target = getNewTargetInstance(...methodParams);
+        const actual = target.evaluateNodes();
+        const expected = getExpectedObject(...methodParams)
+        expect(actual).to.be.deep.equal(expected);
+    });
+
+    it('evaluate stack1 example in us-east-1 Prod testing backward compatibility method "evaluateNodes()"', () => {
         const methodParams = ["stack1", "us-east-1-prod"];
         const target = getNewTargetInstance(...methodParams);
         const actual = target.evaulateNodes();
@@ -27,18 +36,18 @@ describe('NodeEvaulator', () => {
         expect(actual).to.be.deep.equal(expected);
     });
 
-    it('evaulate stack1 example in us-east-1 Beta', () => {
+    it('evaluate stack1 example in us-east-1 Beta', () => {
         const methodParams = ["stack1", "us-east-1-beta"];
         const target = getNewTargetInstance(...methodParams);
-        const actual = target.evaulateNodes();
+        const actual = target.evaluateNodes();
         const expected = getExpectedObject(...methodParams)
         expect(actual).to.be.deep.equal(expected);
     });
 
-    it('evaulate stack1 example in us-west-2 Prod', () => {
+    it('evaluate stack1 example in us-west-2 Prod', () => {
         const methodParams = ["stack1", "us-west-2-prod"];
         const target = getNewTargetInstance(...methodParams);
-        const actual = target.evaulateNodes();
+        const actual = target.evaluateNodes();
         const expected = getExpectedObject(...methodParams)
         expect(actual).to.be.deep.equal(expected);
     });

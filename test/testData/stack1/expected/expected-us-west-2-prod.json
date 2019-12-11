@@ -73,7 +73,7 @@
   "Outputs": {
     "StackArn": {
       "Description": "Resource ARN of the Stack",
-      "Value": "MyEvaulatedFakeStackUsWest2"
+      "Value": "MyEvaluatedFakeStackUsWest2"
     }
   },
   "Parameters": {

@@ -1,11 +1,11 @@
 {
-    "RefResolveres":
+    "RefResolvers":
     {
         "AWS::Region": "us-east-1",
         "AWS::Partition": "aws",
         "AWS::AccountId": "123123123123",
         "Stage": "beta",
-        "AWS::StackId": "MyEvaulatedFakeStackUsEast1"
+        "AWS::StackId": "MyEvaluatedFakeStackUsEast1"
     },
     "Fn::GetAttResolvers": {
        "AuditLogsBucket": {

@@ -5,11 +5,11 @@ class FnJoinNode extends ArrayNode {
         super(node, nodeAccessor, enableVerboseLogging);
     }
 
-    evaulate() {
+    evaluate() {
         let result = this.node;
         if (this.directDependencies.length >= 2) {
-            const separator = this.directDependencies[0].evaulate();
-            const items = this.directDependencies[1].evaulate();
+            const separator = this.directDependencies[0].evaluate();
+            const items = this.directDependencies[1].evaluate();
             result = items.join(separator);
         }
 

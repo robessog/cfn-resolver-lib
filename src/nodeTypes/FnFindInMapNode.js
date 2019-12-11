@@ -5,11 +5,11 @@ class FnFindInMapNode extends ArrayNode {
         this.mappings = mappings;
     }
 
-    evaulate() {
+    evaluate() {
         let result = this.node;
-        const mappingName = this.directDependencies[0].evaulate();
-        const level1Key = this.directDependencies[1].evaulate();
-        const level2Key = this.directDependencies[2].evaulate();
+        const mappingName = this.directDependencies[0].evaluate();
+        const level1Key = this.directDependencies[1].evaluate();
+        const level2Key = this.directDependencies[2].evaluate();
         if (!this.mappings.hasOwnProperty(mappingName)) {
             console.warn("Not found mapping: " + mappingName);
         }
@@ -23,7 +23,7 @@ class FnFindInMapNode extends ArrayNode {
             result = this.mappings[mappingName][level1Key][level2Key];
         }
 
-        super.log("FnFindInMapNode evaulated: ");
+        super.log("FnFindInMapNode evaluated: ");
         super.log(result);
         return result;
     }
