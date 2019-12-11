@@ -19,6 +19,11 @@ class ArrayNode extends Node {
     }
 
     evaluateResultedArray(array) {
+        // Backward compatibility
+        return this.evaluateResultedArray();
+    }
+
+    evaluateResultedArray(array) {
         // simple array
         return array;
     }

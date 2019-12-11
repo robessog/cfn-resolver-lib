@@ -28,6 +28,11 @@ class Node {
         return this.directDependencies.length === 1;
     }
 
+    evaluate() {
+        // Backward compatibility
+        return this.evaluate();
+    }
+
     evaluate(){
         throw "Should not happen, child class implementations should handle this case";
     }
