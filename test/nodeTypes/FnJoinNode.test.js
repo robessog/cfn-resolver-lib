@@ -11,7 +11,7 @@ describe('FnJoin', () => {
     target = new FnJoinNode(mockNode, mockNodeAccessor, false);
   })
 
-  it('evaulate strings', () => {
+  it('evaluate strings', () => {
     addChildToNode(target, 0, "<separator>")
     addChildToNode(target, 1, [
       "valFirst",
@@ -20,24 +20,24 @@ describe('FnJoin', () => {
     ]);
 
 
-    const actual = target.evaulate();
+    const actual = target.evaluate();
 
     assert.equal(actual, "valFirst<separator>valMiddle1<separator>valMiddle2");
   });
 
-  it('evaulate integeres', () => {
+  it('evaluate integeres', () => {
     addChildToNode(target, 0, "-");
     addChildToNode(target, 1, [
       1234,
       0,
       -99,
     ]);
-    const actual = target.evaulate();
+    const actual = target.evaluate();
 
     assert.equal(actual, "1234-0--99");
   });
 
-  it('evaulate floats', () => {
+  it('evaluate floats', () => {
     addChildToNode(target, 0, "/");
     addChildToNode(target, 1, [
       0.1920,
@@ -45,7 +45,7 @@ describe('FnJoin', () => {
       -99,
     ]);
 
-    const actual = target.evaulate();
+    const actual = target.evaluate();
 
     assert.equal(actual, "0.192/1.2/-99");
   });

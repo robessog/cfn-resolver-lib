@@ -1,14 +1,16 @@
 const traverse = require('traverse');
 const { convertNode } = require("./convertNode");
 
-class NodeEvaulator {
+class NodeEvaluator {
     constructor(srcObj, params, enableVerboseLogging){
         this.srcObj = srcObj;
         this.params = params;
+        // backward compatibility
+        this.params.RefResolveres = this.params.RefResolvers;
         this.enableVerboseLogging = enableVerboseLogging;
     }
 
-    evaulateNodes(){
+    evaluateNodes(){
         let convRoot = {};
 
         const getFieldValueAtWrappedPath = (node, path) => {
@@ -37,14 +39,14 @@ class NodeEvaulator {
             }
         });
 
-        let evaulatedObj = {};
+        let evaluatedObj = {};
 
         convRoot.directDependencies.forEach((depNode) => {
-            evaulatedObj[depNode.nodeAccessor.key] = depNode.evaulate();
+            evaluatedObj[depNode.nodeAccessor.key] = depNode.evaluate();
         });
 
-        return evaulatedObj;
+        return evaluatedObj;
     }
 }
 
-module.exports = NodeEvaulator;
+module.exports = NodeEvaluator;

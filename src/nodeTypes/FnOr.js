@@ -6,7 +6,7 @@ class FnOr extends ArrayNode {
         super(node, nodeAccessor, enableVerboseLogging);
     }
 
-    evaulateResultedArray(array) {
+    evaluateResultedArray(array) {
         let result = false;
         array.forEach((boolVal) => {
             if(!_.isBoolean(boolVal)) {

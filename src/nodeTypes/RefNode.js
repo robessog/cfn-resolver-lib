@@ -21,13 +21,13 @@ class RefNode extends ObjectNode {
         return str;
     }
 
-    evaulate() {
+    evaluate() {
         let result = this.node; // by default
         if (this.canResolve(this.node)) {
             result = this.resolveCfnPseudoParam(this.node);
         }
 
-        super.log("Ref evaulated: ");
+        super.log("Ref evaluated: ");
         super.log(result);
         return result;
     }

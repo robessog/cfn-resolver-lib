@@ -6,8 +6,8 @@ const { FnIf } = require('../../src/nodeTypes')
 
 const convertedConditions = {
   wrappedObject: {
-    False: { evaulate: () => false },
-    True: { evaulate: () => true }
+    False: { evaluate: () => false },
+    True: { evaluate: () => true }
   }
 };
 
@@ -19,19 +19,19 @@ describe('FnIf', () => {
     target = new FnIf(mockNode, mockNodeAccessor, false, convertedConditions);
   })
 
-  it('evaulate if false', () => {
+  it('evaluate if false', () => {
     addChildToNode(target,  0, "False")
     addChildToNode(target,  1, "testTrueValue")
     addChildToNode(target,  2, "testFalseValue")
-    const actual = target.evaulate();
+    const actual = target.evaluate();
     assert.equal(actual, "testFalseValue");
   });
 
-  it('evaulate if true', () => {
+  it('evaluate if true', () => {
     addChildToNode(target,  0, "True")
     addChildToNode(target,  1, "testTrueValue")
     addChildToNode(target,  2, "testFalseValue")
-    const actual = target.evaulate();
+    const actual = target.evaluate();
     assert.equal(actual, "testTrueValue");
   });
 

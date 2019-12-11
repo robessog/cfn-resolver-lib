@@ -5,10 +5,10 @@ class FnGetAttNode extends ArrayNode {
         this.getAttrResolvers = getAttrResolvers;
     }
 
-    evaulate() {
+    evaluate() {
         let result = this.node;
-        const resourceLogicalId = this.directDependencies[0].evaulate();
-        const attrName = this.directDependencies[1].evaulate();
+        const resourceLogicalId = this.directDependencies[0].evaluate();
+        const attrName = this.directDependencies[1].evaluate();
 
         if (!this.getAttrResolvers[resourceLogicalId]) {
             console.warn("Fn::GetAttResolvers not found in params file: " + resourceLogicalId);
@@ -19,7 +19,7 @@ class FnGetAttNode extends ArrayNode {
             result = this.getAttrResolvers[resourceLogicalId][attrName];
         }
 
-        super.log("FnGetAttNode evaulated: ");
+        super.log("FnGetAttNode evaluated: ");
         super.log(result);
         return result;
     }

@@ -21,7 +21,7 @@ class ObjectNode extends Node {
         return this.wrappedObj;
     }
 
-    evaulate(){
+    evaluate(){
         super.log("Eval: ", this.nodeAccessor.path.join('/'));
         let result = this.node; // by default or simple value (number, string)
         
@@ -29,16 +29,16 @@ class ObjectNode extends Node {
             super.log("Leaf: ",  this.node, this.nodeAccessor.path.join('/'));
         } 
         else if(this.hasSingleDependency && this.directDependencies[0].shouldReplaceParent()){
-            result = this.directDependencies[0].evaulate();
+            result = this.directDependencies[0].evaluate();
         } 
         else {
             result = {};
             this.directDependencies.forEach( (dep) => {
-                result[dep.nodeAccessor.key] = dep.evaulate();
+                result[dep.nodeAccessor.key] = dep.evaluate();
             });
         }
         
-        super.log("ObjectNode evaulated: ");
+        super.log("ObjectNode evaluated: ");
         super.log(result);
         return result;
     }

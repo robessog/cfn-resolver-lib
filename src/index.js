@@ -1,3 +1,3 @@
-const NodeEvaulator = require("./nodeEvaulator");
+const NodeEvaluator = require("./nodeEvaluator");
 
-module.exports = NodeEvaulator;
+module.exports = NodeEvaluator;

@@ -6,17 +6,17 @@ class FnIf extends ArrayNode {
         this.convConditions = convConditions;
     }
 
-    evaulate() {
+    evaluate() {
         let result = this.node;
         if (this.directDependencies.length >= 3) {
-            const conditionName = this.directDependencies[0].evaulate();
-            const evaulatedCondition = this.convConditions.wrappedObject[conditionName].evaulate();
-            const valueIfTrue = this.directDependencies[1].evaulate();
-            const valueIfFalse = this.directDependencies[2].evaulate();
-            result = evaulatedCondition ? valueIfTrue : valueIfFalse;
+            const conditionName = this.directDependencies[0].evaluate();
+            const evaluatedCondition = this.convConditions.wrappedObject[conditionName].evaluate();
+            const valueIfTrue = this.directDependencies[1].evaluate();
+            const valueIfFalse = this.directDependencies[2].evaluate();
+            result = evaluatedCondition ? valueIfTrue : valueIfFalse;
         }
 
-        super.log("FnIf evaulated: ");
+        super.log("FnIf evaluated: ");
         super.log(result);
         return result;
     }

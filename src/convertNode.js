@@ -44,14 +44,14 @@ const convertNode = (node, nodeAccessor, srcObj, params, convRoot, enableVerbose
         case "Fn::If":
             return new FnIf(node, nodeAccessor, enableVerboseLogging, convRoot.wrappedObject.Conditions);
         case "Fn::GetAZs":
-            return new FnGetAZsNode(node, nodeAccessor, enableVerboseLogging, azMapping, params.RefResolveres["AWS::Region"]);
+            return new FnGetAZsNode(node, nodeAccessor, enableVerboseLogging, azMapping, params.RefResolvers["AWS::Region"]);
         case "Condition":
             if (nodeAccessor.path.length >= 3 && nodeAccessor.path[2] == "Properties") {
                 return new PropertyConditionNode(node, nodeAccessor, enableVerboseLogging);
             }
             return new ConditionNode(node, nodeAccessor, enableVerboseLogging, convRoot.wrappedObject.Conditions);
         case "Ref":
-            return new RefNode(node, nodeAccessor, enableVerboseLogging, params.RefResolveres);
+            return new RefNode(node, nodeAccessor, enableVerboseLogging, params.RefResolvers);
         case "Fn::GetAtt":
             return new FnGetAttNode(node, nodeAccessor, enableVerboseLogging, params["Fn::GetAttResolvers"]);
     }

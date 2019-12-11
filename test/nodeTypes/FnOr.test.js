@@ -11,21 +11,21 @@ describe('FnOr', () => {
     target = new FnOr(mockNode, mockNodeAccessor, false);
   })
 
-  it('evaulate multiple false items and single true item to true', () => {
+  it('evaluate multiple false items and single true item to true', () => {
     addChildToNode(target, 0, false);
     addChildToNode(target, 1, true);
     addChildToNode(target, 2, false);
     
-    const actual = target.evaulate();
+    const actual = target.evaluate();
 
     expect(actual).to.deep.equal(true)
   });
 
-  it('evaulate all items false to false', () => {
+  it('evaluate all items false to false', () => {
     addChildToNode(target, 0, false);
     addChildToNode(target, 1, false);
     
-    const actual = target.evaulate();
+    const actual = target.evaluate();
 
     expect(actual).to.deep.equal(false)
   });

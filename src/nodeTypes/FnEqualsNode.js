@@ -6,7 +6,7 @@ class FnEqualsNode extends ArrayNode {
         super(node, nodeAccessor, enableVerboseLogging);
     }
 
-    evaulateResultedArray(array) {
+    evaluateResultedArray(array) {
         const val1 = array[0];
         const val2 = array[1];
 

@@ -11,11 +11,11 @@ describe('PropertyConditionNode', () => {
     target = new PropertyConditionNode(mockNode, mockNodeAccessor, false);
   })
 
-  it('evaulate keeps condition node', () => {
+  it('evaluate keeps condition node', () => {
     const expected = {"StringEqualsIgnoreCase":  { "aws:username" : "johndoe" }};
     addChildToNode(target, "StringEqualsIgnoreCase", { "aws:username" : "johndoe" });
 
-    const actual = target.evaulate();
+    const actual = target.evaluate();
     expect(actual).to.deep.equal(expected);
   });
 

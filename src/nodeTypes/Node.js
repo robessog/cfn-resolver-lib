@@ -28,7 +28,7 @@ class Node {
         return this.directDependencies.length === 1;
     }
 
-    evaulate(){
+    evaluate(){
         throw "Should not happen, child class implementations should handle this case";
     }
 }
