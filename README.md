@@ -1,16 +1,17 @@
 # cfn-resolver-lib
 [![Build Status](https://travis-ci.com/robessog/cfn-resolver-lib.svg?branch=master)](https://travis-ci.com/robessog/cfn-resolver-lib)
 [![npm version](https://badge.fury.io/js/cfn-resolver-lib.svg)](https://badge.fury.io/js/cfn-resolver-lib)
+[![npm version](https://badge.fury.io/js/cfn-resolver-lib.svg)](https://badge.fury.io/js/cfn-resolver-lib)
 
-JavaScript library that resolves and evaluates values in [CloudFormation](https://aws.amazon.com/cloudformation/) templates based on the provided stack parameters and produces the JS object representation of the resolved CFN template.
+JavaScript library that resolves and evaluates values in [AWS CloudFormation](https://aws.amazon.com/cloudformation/) templates based on the provided stack parameters and produces the JS object representation of the resolved CFN template.
 
-Did you ever had to debug what's wrong with your CloudFormation template and why your stack deployment fails? Your YAML/JSON could contain some logic with all kinds of nested [intrinsic functions](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/intrinsic-function-reference.html) and CFN [pseudo parameters](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/pseudo-parameter-reference.html) and sometimes this can get even more complex when you use a tool (e.g. [AWS CDK](https://docs.aws.amazon.com/cdk/latest/guide/home.html)) that generates the file for you.
+Did you ever had to debug what's wrong with your AWS CloudFormation template and why your stack deployment fails? Your YAML/JSON could contain some logic with all kinds of nested [intrinsic functions](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/intrinsic-function-reference.html) and CFN [pseudo parameters](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/pseudo-parameter-reference.html) and sometimes this can get even more complex when you use a tool (e.g. [AWS CDK](https://docs.aws.amazon.com/cdk/latest/guide/home.html)) that generates the file for you.
 
 If you have more than couple of these in your templates it is quite time consuming to figure out which exactly caused the deployment to fail. This simple tool ([cfn-resolver-lib]((https://www.npmjs.com/package/cfn-resolver-lib)) and [cfn-resolver-cli]((https://www.npmjs.com/package/cfn-resolver-cli))) tries to mitigate the issue by evaulating these logic and provide the final exact values that will be used in deployment time.
 
 [cfn-resolver](https://www.npmjs.com/package/cfn-resolver-cli) can help you
 * understand your CFN template better
-* troublesoot CloudFormation deployment issues faster
+* troubleshoot CloudFormation deployment issues faster
 * secure your IaC with unit tests that assert on exact values before actually deploying anything
   * e.g. your unit test now can assert that the `s3_reader` IAM user has access to `prod-uswest2-redshift-log` S3 bucket in `us-west-2` region in your `prod` stack.
 
@@ -73,7 +74,7 @@ const resolvedObj = new NodeEvaluator(cloufFormationTemplateDeseralizedObj, stac
 * Support [Fn::ImportValue](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/intrinsic-function-reference-importvalue.html)
 * Support [Fn::Base64](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/intrinsic-function-reference-base64.html)
 * Support [Fn::Cidr](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/intrinsic-function-reference-cidr.html)
-* Add linter/debugging features by identified valudation errors and warnings found during template evaulation (e.g. like [cfn-lint](https://www.npmjs.com/package/cfn-lint))
+* Add linter/debugging features by identified valudation errors and warnings found during template evaluation (e.g. like [cfn-lint](https://www.npmjs.com/package/cfn-lint))
 
 ## Contribution
 Feel free to implement any missing features or fix bugs. In any case don't forget to add unit tests.
