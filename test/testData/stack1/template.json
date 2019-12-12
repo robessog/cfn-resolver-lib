@@ -865,6 +865,66 @@
         ]
       },
       "Type": "AWS::IAM::Policy"
+    },
+    "FooSrvQueueOldestMessageAgeHighWarningAlarm": {
+      "Properties": {
+        "AlarmDescription": "Example Alarm description",
+        "AlarmName": {
+          "Fn::Join": [
+            ".",
+            [
+              {
+                "Fn::GetAtt": [
+                  "FooSrvQueue",
+                  "QueueName"
+                ]
+              },
+              "OldestMessageAgeHighWarning"
+            ]
+          ]
+        },
+        "ComparisonOperator": "GreaterThanThreshold",
+        "Dimensions": [
+          {
+            "Name": "QueueName",
+            "Value": {
+              "Fn::GetAtt": [
+                "FooSrvQueue",
+                "QueueName"
+              ]
+            }
+          }
+        ],
+        "EvaluationPeriods": 1,
+        "MetricName": "ApproximateAgeOfOldestMessage",
+        "Namespace": "AWS/SQS",
+        "Period": 300,
+        "Statistic": "Maximum",
+        "Threshold": 600
+      },
+      "Type": "AWS::CloudWatch::Alarm"
+    },
+    "FooSrvQueue": {
+      "Properties": {
+        "QueueName": {
+          "Fn::Join": [
+            "",
+            [
+              "TestQueue-",
+              {
+                "Fn::FindInMap": [
+                  "StageNameWithCapitalInitialLetter",
+                  "Name",
+                  {
+                    "Ref": "Stage"
+                  }
+                ]
+              }
+            ]
+          ]
+        }
+      },
+      "Type": "AWS::SQS::Queue"
     }
   }
 }

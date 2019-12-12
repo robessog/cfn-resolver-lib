@@ -394,6 +394,32 @@
         ]
       },
       "Type": "AWS::IAM::Policy"
+    },
+    "FooSrvQueueOldestMessageAgeHighWarningAlarm": {
+      "Properties": {
+        "AlarmDescription": "Example Alarm description",
+        "AlarmName": "TestQueue-Prod.OldestMessageAgeHighWarning",
+        "ComparisonOperator": "GreaterThanThreshold",
+        "Dimensions": [
+          {
+            "Name": "QueueName",
+            "Value": "TestQueue-Prod"
+          }
+        ],
+        "EvaluationPeriods": 1,
+        "MetricName": "ApproximateAgeOfOldestMessage",
+        "Namespace": "AWS/SQS",
+        "Period": 300,
+        "Statistic": "Maximum",
+        "Threshold": 600
+      },
+      "Type": "AWS::CloudWatch::Alarm"
+    },
+    "FooSrvQueue": {
+      "Properties": {
+        "QueueName": "TestQueue-Prod"
+      },
+      "Type": "AWS::SQS::Queue"
     }
   }
 }

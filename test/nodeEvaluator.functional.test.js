@@ -1,7 +1,6 @@
 const expect = require('chai').expect;
 
 const NodeEvaluator = require('../src/index');
-const NodeEvaulator = require('../src/index');
 
 const enableLogging = false
 

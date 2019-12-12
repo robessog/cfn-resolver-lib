@@ -24,5 +24,6 @@ const mockNodeAccessor = {
 module.exports = {
     addChildToNode,
     mockNode,
-    mockNodeAccessor
+    mockNodeAccessor,
+    getMockNode
 }

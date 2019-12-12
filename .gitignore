@@ -1,6 +1,7 @@
 node_modules
 .nyc_output
 coverage
+coverage.lcov
 cfn-resolver-lib-*.tgz
 .DS_Store
 buildUtils/tempCreds.json
