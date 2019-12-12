@@ -5,8 +5,9 @@ node_js:
   - 8
 
 install:
-  - npm install -g mocha
-  - npm install -g nyc
+  - npm install -g mocha # this should be installed from devDependencies
+  - npm install -g chai # this should be installed from devDependencies
+  - npm install -g nyc # this should be installed from devDependencies
   - npm install -g codecov
 script:
   - npm run coverage
