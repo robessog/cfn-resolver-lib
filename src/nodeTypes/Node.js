@@ -6,9 +6,9 @@ class Node {
         this.enableVerboseLogging = enableVerboseLogging;
     }
 
-    log(str) {
+    log(...str) {
         if(this.enableVerboseLogging){
-            console.log(str);
+            console.log(...str);
         }
     }
 

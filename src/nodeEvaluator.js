@@ -4,7 +4,7 @@ const { convertNode } = require("./convertNode");
 class NodeEvaluator {
     constructor(srcObj, params, enableVerboseLogging){
         this.srcObj = srcObj;
-        this.params = params;
+        this.params = params || {};
         this.enableVerboseLogging = enableVerboseLogging;
     }
 
