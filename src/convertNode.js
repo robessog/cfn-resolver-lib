@@ -22,7 +22,7 @@ const azMapping = require('./AZMap.json');
 
 const convertNode = (node, nodeAccessor, srcObj, params, convRoot, enableVerboseLogging) => {
     // keeping backward compatibility because of typo in previos versions
-    const refResolvers = params.RefResolvers || params.RefResolevers; 
+    const refResolvers = params.RefResolvers || params.RefResolevers || {}; 
 
     switch (nodeAccessor.key) {
         case "Fn::FindInMap":
@@ -55,7 +55,7 @@ const convertNode = (node, nodeAccessor, srcObj, params, convRoot, enableVerbose
         case "Ref":
             return new RefNode(node, nodeAccessor, enableVerboseLogging, refResolvers);
         case "Fn::GetAtt":
-            return new FnGetAttNode(node, nodeAccessor, enableVerboseLogging, params["Fn::GetAttResolvers"]);
+            return new FnGetAttNode(node, nodeAccessor, enableVerboseLogging, params["Fn::GetAttResolvers"] || {});
     }
 
     if( _.isArray(nodeAccessor.node)){

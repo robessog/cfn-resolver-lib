@@ -32,5 +32,9 @@ describe('ArrayNode', () => {
     expect(actual).to.deep.equal(["item0", nestedArray , "item2"])
   });
 
-  // TODO: testcase when array is empty
+  it('evaluate empty arrays', () => {
+    const actual = target.evaluate();
+
+    expect(actual).to.deep.equal([])
+  });
 });
