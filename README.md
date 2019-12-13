@@ -1,6 +1,6 @@
 # cfn-resolver-lib
 [![Build Status](https://travis-ci.com/robessog/cfn-resolver-lib.svg?branch=master)](https://travis-ci.com/robessog/cfn-resolver-lib)
-[![npm version](https://badge.fury.io/js/cfn-resolver-lib.svg)](https://badge.fury.io/js/cfn-resolver-lib)
+[![codecov](https://codecov.io/gh/robessog/cfn-resolver-lib/branch/master/graph/badge.svg)](https://codecov.io/gh/robessog/cfn-resolver-lib)
 [![npm version](https://badge.fury.io/js/cfn-resolver-lib.svg)](https://badge.fury.io/js/cfn-resolver-lib)
 
 JavaScript library that resolves and evaluates values in [AWS CloudFormation](https://aws.amazon.com/cloudformation/) templates based on the provided stack parameters and produces the JS object representation of the resolved CFN template.
