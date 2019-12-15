@@ -1,13 +1,15 @@
 # cfn-resolver-lib
 [![Build Status](https://travis-ci.com/robessog/cfn-resolver-lib.svg?branch=master)](https://travis-ci.com/robessog/cfn-resolver-lib)
 [![codecov](https://codecov.io/gh/robessog/cfn-resolver-lib/branch/master/graph/badge.svg)](https://codecov.io/gh/robessog/cfn-resolver-lib)
+![depend bot](https://badgen.net/dependabot/robessog/cfn-resolver-lib?icon=dependabot)
 [![npm version](https://badge.fury.io/js/cfn-resolver-lib.svg)](https://badge.fury.io/js/cfn-resolver-lib)
+
 
 JavaScript library that resolves and evaluates values in [AWS CloudFormation](https://aws.amazon.com/cloudformation/) templates based on the provided stack parameters and produces the JS object representation of the resolved CFN template.
 
 Did you ever had to debug what's wrong with your AWS CloudFormation template and why your stack deployment fails? Your YAML/JSON could contain some logic with all kinds of nested [intrinsic functions](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/intrinsic-function-reference.html) and CFN [pseudo parameters](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/pseudo-parameter-reference.html) and sometimes this can get even more complex when you use a tool (e.g. [AWS CDK](https://docs.aws.amazon.com/cdk/latest/guide/home.html)) that generates the file for you.
 
-If you have more than couple of these in your templates it is quite time consuming to figure out which exactly caused the deployment to fail. This simple tool ([cfn-resolver-lib]((https://www.npmjs.com/package/cfn-resolver-lib)) and [cfn-resolver-cli]((https://www.npmjs.com/package/cfn-resolver-cli))) tries to mitigate the issue by evaulating these logic and provide the final exact values that will be used in deployment time.
+If you have more than couple of these in your templates it is quite time consuming to figure out which exactly caused the deployment to fail. This simple tool ([cfn-resolver-lib]((https://www.npmjs.com/package/cfn-resolver-lib)) and [cfn-resolver-cli]((https://www.npmjs.com/package/cfn-resolver-cli))) tries to mitigate the issue by evaluating these logic and provide the final exact values that will be used in deployment time.
 
 [cfn-resolver](https://www.npmjs.com/package/cfn-resolver-cli) can help you
 * understand your CFN template better
