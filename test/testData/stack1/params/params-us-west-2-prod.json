@@ -8,8 +8,8 @@
         "AWS::StackId": "MyEvaluatedFakeStackUsWest2"
     },
     "Fn::GetAttResolvers": {
-       "AuditLogsBucket": {
-            "Arn": "arn:aws:s3:::prod-uswest2-redshift-log"
+       "MyUnknownResource1": {
+            "Arn": "arn:aws:s3:::my-unkonwn-random-bucket"
        }
     }
 }

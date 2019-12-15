@@ -1,38 +1,38 @@
 const ArrayNode = require('./ArrayNode');
-const { getPathArrayFromObjectPath, isDefeinedOnPath, getFieldValueAtWrappedPath } = require('../wrappingHelpers');
 
 class FnGetAttNode extends ArrayNode {
-    constructor(node, nodeAccessor, enableVerboseLogging, getAttrResolvers, convertedResources) {
+    constructor(node, nodeAccessor, enableVerboseLogging, getAttrResolvers, convRoot) {
         super(node, nodeAccessor, enableVerboseLogging);
         this.getAttrResolvers = getAttrResolvers;
-        this.convertedResources = convertedResources;
+        this.convRoot = convRoot;
+
+        this.convertedResources = convRoot.wrappedObject.Resources;
     }
 
     evaluate() {
         let result = this.node;
         const resourceLogicalId = this.directDependencies[0].evaluate();
-        const attrName = this.directDependencies[1].evaluate();
+        const attrPath = this.directDependencies[1].evaluate();
 
-        // Try to resolve the attribute value from the current template (e.g. QueuName)
-        if (this.convertedResources.wrappedObject.hasOwnProperty(resourceLogicalId)) {
-            const wrappedResourceNode = this.convertedResources.wrappedObject[resourceLogicalId];
-            const pathArray = getPathArrayFromObjectPath(attrName);
-            const propertiesNode = wrappedResourceNode.wrappedObject.Properties;
-            if (isDefeinedOnPath(propertiesNode, pathArray)) {
-                const attrNode = getFieldValueAtWrappedPath(propertiesNode, pathArray);
-                const evaluatedAttrValue =  attrNode.evaluate();
-                result = evaluatedAttrValue;
-            }
+        const resource = this.convertedResources.findWrappedResource(resourceLogicalId);
+
+        // Handle ARN resolutions if resource is present in the template
+        if (attrPath === "Arn" && resource) {
+            const resolvedArn = this.convertedResources.getResolvedArn(resourceLogicalId);
+            result = resolvedArn || result;
+        } // Try to resolve the attribute value from the current template (e.g. MySqs.QueuName)
+        else if (resource && resource.isPropertyDefinedOnObjectPath(attrPath)) {
+            result = resource.getResolvedProperyValueOnObjectPath(attrPath);
         }
 
         // Override values from the provided Fn::GetAttResolvers
         if (!this.getAttrResolvers[resourceLogicalId]) {
             console.warn("Fn::GetAttResolvers not found in params file: " + resourceLogicalId);
         }
-        else if (!this.getAttrResolvers[resourceLogicalId][attrName]) {
-            console.warn("Fn::GetAttResolvers not found in params file: " + resourceLogicalId + "." + attrName);
+        else if (!this.getAttrResolvers[resourceLogicalId][attrPath]) {
+            console.warn("Fn::GetAttResolvers not found in params file: " + resourceLogicalId + "." + attrPath);
         } else {
-            result = this.getAttrResolvers[resourceLogicalId][attrName];
+            result = this.getAttrResolvers[resourceLogicalId][attrPath];
         }
 
         super.log("FnGetAttNode evaluated: ");

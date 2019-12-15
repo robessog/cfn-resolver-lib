@@ -50,4 +50,6 @@ describe('NodeEvaluator', () => {
         const expected = getExpectedObject(...methodParams)
         expect(actual).to.be.deep.equal(expected);
     });
+
+    // TODO: run on these valid test data: https://github.com/martysweet/cfn-lint/tree/master/testData/valid/json
 });

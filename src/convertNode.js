@@ -15,17 +15,26 @@ const {
     ConditionNode,
     PropertyConditionNode,
     FnGetAttNode,
-    ArrayNode
+    ArrayNode,
+    ResourcesNode,
+    ResourceNode
 } = require('./nodeTypes');
 const _ = require('lodash')
 const azMapping = require('./AZMap.json');
+const defaultArnSchemeMap = require('./data/CfnResourceTypeToArnSchemeMap');
+const ArnResolver = require('./ArnResolver');
 
 const convertNode = (node, nodeAccessor, srcObj, params, convRoot, enableVerboseLogging) => {
     const getAttResolvers = params["Fn::GetAttResolvers"] || {};
+    const userDefinedArnSchemas = params["ArnSchemas"] || {};
     // keeping backward compatibility because of typo in previos versions
     const refResolvers = params.RefResolvers || params.RefResolevers || {};
 
+    const arnResolver = new ArnResolver(defaultArnSchemeMap, userDefinedArnSchemas, refResolvers);
+
     switch (nodeAccessor.key) {
+        case "Resources":
+            return new ResourcesNode(node, nodeAccessor, enableVerboseLogging, arnResolver);
         case "Fn::FindInMap":
             return new FnFindInMapNode(node, nodeAccessor, enableVerboseLogging, srcObj.Mappings);
         case "Fn::Join":
@@ -56,11 +65,15 @@ const convertNode = (node, nodeAccessor, srcObj, params, convRoot, enableVerbose
         case "Ref":
             return new RefNode(node, nodeAccessor, enableVerboseLogging, refResolvers);
         case "Fn::GetAtt":
-            return new FnGetAttNode(node, nodeAccessor, enableVerboseLogging, getAttResolvers, convRoot.wrappedObject.Resources);
+            return new FnGetAttNode(node, nodeAccessor, enableVerboseLogging, getAttResolvers, convRoot);
     }
 
-    if( _.isArray(nodeAccessor.node)){
+    if (_.isArray(nodeAccessor.node)) {
         return new ArrayNode(node, nodeAccessor, enableVerboseLogging);
+    }
+    // if it is direct child of "Resources" node, we create a ResourceNode
+    if (nodeAccessor.parent && nodeAccessor.parent.key === "Resources") {
+        return new ResourceNode(node, nodeAccessor, enableVerboseLogging);
     }
     return new ObjectNode(node, nodeAccessor, enableVerboseLogging);
 };

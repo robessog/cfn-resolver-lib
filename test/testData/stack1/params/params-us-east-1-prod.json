@@ -1,6 +1,5 @@
 {
-    "RefResolvers":
-    {
+    "RefResolvers": {
         "AWS::Region": "us-east-1",
         "AWS::Partition": "aws",
         "AWS::AccountId": "666666666666",
@@ -8,8 +7,8 @@
         "AWS::StackId": "MyEvaluatedFakeStackUsEast1"
     },
     "Fn::GetAttResolvers": {
-       "AuditLogsBucket": {
-            "Arn": "arn:aws:s3:::redshift-log"
-       }
+        "MyUnknownResource1": {
+            "Arn": "arn:aws:s3:::my-unkonwn-random-bucket"
+        }
     }
 }

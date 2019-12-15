@@ -346,7 +346,7 @@
               "Principal": {
                 "AWS": "arn:aws:iam::222222222222:user/logs"
               },
-              "Resource": "arn:aws:s3:::redshift-log"
+              "Resource": "arn:aws:s3:::my-unkonwn-random-bucket"
             }
           ],
           "Version": "2012-10-17"

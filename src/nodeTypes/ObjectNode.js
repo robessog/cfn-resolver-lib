@@ -1,5 +1,4 @@
 const Node = require('./Node');
-const RefNode = require('./RefNode');
 
 class ObjectNode extends Node {
     constructor(node, nodeAccessor, enableVerboseLogging){

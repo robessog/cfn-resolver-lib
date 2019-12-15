@@ -735,7 +735,7 @@
               },
               "Resource": {
                 "Fn::GetAtt": [
-                  "AuditLogsBucket",
+                  "MyUnknownResource1",
                   "Arn"
                 ]
               }
