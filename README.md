@@ -76,7 +76,7 @@ The `${Partition}`, `${Region}` and `${Region}` placeholders will be resolved by
 
 
 ### Fn::ImportValue resolvers
-Define yout Fn::ImportValue resolvers in the parameter map as the following:
+Define your Fn::ImportValue resolvers in the parameter map as the following:
 ```js
 { 
   "Fn::ImportValueResolvers": {
