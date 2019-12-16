@@ -11,6 +11,11 @@
             "Arn": "arn:aws:s3:::my-unkonwn-random-bucket"
         }
     },
+    "Fn::ImportValueResolvers": {
+        "RedshiftMainClusterSecurityGroup": "FooSrvRsMainClusterSecurityGroupFakeId",
+        "RedshiftMainClusterSubnet1": "FooSrvSubnet1FakeId",
+        "RedshiftMainClusterSubnet2": "FooSrvSubnet2FakeId"
+    },
     "ArnSchemas": {
         "AWS::S3::Bucket":               "arn:${Partition}:s3:::${BucketName}"
     }

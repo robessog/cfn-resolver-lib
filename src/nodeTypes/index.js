@@ -16,3 +16,4 @@ module.exports.FnGetAttNode = require("./FnGetAttNode");
 module.exports.ArrayNode = require("./ArrayNode");
 module.exports.ResourcesNode = require("./ResourcesNode");
 module.exports.ResourceNode = require("./ResourceNode");
+module.exports.ResolveFromMapNode = require('./ResolveFromMapNode');

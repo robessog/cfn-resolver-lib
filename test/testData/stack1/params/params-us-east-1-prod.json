@@ -6,6 +6,11 @@
         "Stage": "prod",
         "AWS::StackId": "MyEvaluatedFakeStackUsEast1"
     },
+    "Fn::ImportValueResolvers": {
+        "RedshiftMainClusterSecurityGroup": "FooSrvRsMainClusterSecurityGroupFakeId",
+        "RedshiftMainClusterSubnet1": "FooSrvSubnet1FakeId",
+        "RedshiftMainClusterSubnet2": "FooSrvSubnet2FakeId"
+    },
     "Fn::GetAttResolvers": {
         "MyUnknownResource1": {
             "Arn": "arn:aws:s3:::my-unkonwn-random-bucket"

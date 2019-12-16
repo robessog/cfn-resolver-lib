@@ -146,11 +146,7 @@
         "Port": 5439,
         "PreferredMaintenanceWindow": "fri:07:00-fri:07:30",
         "PubliclyAccessible": false,
-        "VpcSecurityGroupIds": [
-          {
-            "Fn::ImportValue": "RedshiftMainClusterSecurityGroup"
-          }
-        ]
+        "VpcSecurityGroupIds": [ "FooSrvRsMainClusterSecurityGroupFakeId" ]
       },
       "Type": "AWS::Redshift::Cluster",
       "UpdateReplacePolicy": "Retain"
@@ -190,14 +186,7 @@
       },
       "Properties": {
         "Description": "Subnet group for FooSrv",
-        "SubnetIds": [
-          {
-            "Fn::ImportValue": "RedshiftMainClusterSubnet1"
-          },
-          {
-            "Fn::ImportValue": "RedshiftMainClusterSubnet2"
-          }
-        ]
+        "SubnetIds": [ "FooSrvSubnet1FakeId", "FooSrvSubnet2FakeId"]
       },
       "Type": "AWS::Redshift::ClusterSubnetGroup"
     },
@@ -311,11 +300,7 @@
         "Port": 5439,
         "PreferredMaintenanceWindow": "fri:07:00-fri:07:30",
         "PubliclyAccessible": false,
-        "VpcSecurityGroupIds": [
-          {
-            "Fn::ImportValue": "RedshiftMainClusterSecurityGroup"
-          }
-        ]
+        "VpcSecurityGroupIds": [ "FooSrvRsMainClusterSecurityGroupFakeId" ]
       },
       "Type": "AWS::Redshift::Cluster",
       "UpdateReplacePolicy": "Retain"

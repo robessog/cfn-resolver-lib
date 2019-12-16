@@ -17,7 +17,8 @@ const {
     FnGetAttNode,
     ArrayNode,
     ResourcesNode,
-    ResourceNode
+    ResourceNode,
+    ResolveFromMapNode
 } = require('./nodeTypes');
 const _ = require('lodash')
 const azMapping = require('./AZMap.json');
@@ -27,8 +28,10 @@ const ArnResolver = require('./ArnResolver');
 const convertNode = (node, nodeAccessor, srcObj, params, convRoot, enableVerboseLogging) => {
     const getAttResolvers = params["Fn::GetAttResolvers"] || {};
     const userDefinedArnSchemas = params["ArnSchemas"] || {};
+    const importValueResolvers = params["Fn::ImportValueResolvers"] || {};
     // keeping backward compatibility because of typo in previos versions
     const refResolvers = params.RefResolvers || params.RefResolevers || {};
+    
 
     const arnResolver = new ArnResolver(defaultArnSchemeMap, userDefinedArnSchemas, refResolvers);
 
@@ -64,6 +67,8 @@ const convertNode = (node, nodeAccessor, srcObj, params, convRoot, enableVerbose
             return new ConditionNode(node, nodeAccessor, enableVerboseLogging, convRoot.wrappedObject.Conditions);
         case "Ref":
             return new RefNode(node, nodeAccessor, enableVerboseLogging, refResolvers);
+        case "Fn::ImportValue":
+                return new ResolveFromMapNode(node, nodeAccessor, enableVerboseLogging, importValueResolvers);
         case "Fn::GetAtt":
             return new FnGetAttNode(node, nodeAccessor, enableVerboseLogging, getAttResolvers, convRoot);
     }

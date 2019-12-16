@@ -38,15 +38,51 @@ const stackParameters = {
       "AWS::AccountId": "000000111111",
       "Stage": "prod",
       "AWS::StackId": "MyEvaluatedFakeStackUsWest2"
-  },
-  "Fn::GetAttResolvers": {
-      AuditLogsBucket: {
-          "Arn": "arn:aws:s3:::prod-uswest2-redshift-log"
-      }
   }
 };
 
 const resolvedObj = new NodeEvaluator(cloufFormationTemplateDeseralizedObj, stackParameters).evaluateNodes();
+```
+
+## Extensibility & Customization
+You can pass additional resolver maps to the `NodeEvaluator` instance, just like `RefResolvers` to customize or **override** the built-in behaviour.
+### Fn::GetAtt resolution
+By default the tool tries to resolve the attributes of resources that are defined within the template itself, but you have the opportunity to override the behaviour for specific cases.
+Just define the Fn::GetAtt resolver map for custom attribute resolution:
+
+```js
+{
+    "Fn::GetAttResolvers": {
+      MyResourceLogicalId1: {
+        "AttribeteKey1": "TheOverridenAttributeValue"
+      }
+  }
+}
+```
+
+#### ARN resolution
+With `Fn::GetAtt` you can refer to ARN of an other resource defined in the template.
+The tool supports ARN resolution for some of the most common AWS CloudFormation resource types (Lambda function, SQS queue, SNS topic, S3 bucket, DyanmoDB Table, etc), but user can provide additional ARN shemas to `NodeEvaulator` intance:
+
+```js
+{ 
+  "ArnSchemas": {
+    "AWS::DynamoDB::Table": "arn:${Partition}:dynamodb:${Region}:${Account}:table/${TableName}"
+  }
+}
+
+```
+The `${Partition}`, `${Region}` and `${Region}` placeholders will be resolved by using the stack parameters. The last placeholder of the arn schema (in the above example `${TableName}`) will be resolved from the attribute from the resource (if both the resource and its attribute can be found in the template).
+
+
+### Fn::ImportValue resolvers
+Define yout Fn::ImportValue resolvers in the parameter map as the following:
+```js
+{ 
+  "Fn::ImportValueResolvers": {
+    "OtherStacksExportedKey1": "MyFakeImportedValue1"
+  }
+}
 ```
 
 
@@ -65,6 +101,7 @@ const resolvedObj = new NodeEvaluator(cloufFormationTemplateDeseralizedObj, stac
 * [Fn::Select](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/intrinsic-function-reference-select.html)
 * [Fn::Split](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/intrinsic-function-reference-split.html)
 * [Fn::Sub](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/intrinsic-function-reference-sub.html) (at the moment only key-value map subtitution is supported)
+* [Fn::ImportValue](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/)
 * [Ref](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/intrinsic-function-reference-ref.html)
 
 
@@ -73,7 +110,7 @@ const resolvedObj = new NodeEvaluator(cloufFormationTemplateDeseralizedObj, stac
 
 ## Roadmap
 * Enchance [Fn::Sub](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/intrinsic-function-reference-sub.html) to work with template parameter names, resource logical IDs, resource attributes
-* Support [Fn::ImportValue](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/intrinsic-function-reference-importvalue.html)
+intrinsic-function-reference-importvalue.html
 * Support [Fn::Base64](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/intrinsic-function-reference-base64.html)
 * Support [Fn::Cidr](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/intrinsic-function-reference-cidr.html)
 * Add linter/debugging features by identified valudation errors and warnings found during template evaluation (e.g. like [cfn-lint](https://www.npmjs.com/package/cfn-lint))
