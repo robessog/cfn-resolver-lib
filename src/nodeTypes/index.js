@@ -3,6 +3,7 @@ module.exports.FnFindInMapNode = require("./FnFindInMapNode");
 module.exports.FnJoinNode = require("./FnJoinNode");
 module.exports.FnSub = require("./FnSub");
 module.exports.FnSelect = require("./FnSelect");
+module.exports.FnSplit = require("./FnSplit");
 module.exports.RefNode = require("./RefNode");
 module.exports.ObjectNode = require("./ObjectNode");
 module.exports.FnOr = require("./FnOr");

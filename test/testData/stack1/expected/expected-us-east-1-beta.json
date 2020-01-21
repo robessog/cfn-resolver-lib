@@ -405,6 +405,12 @@
         "QueueName": "TestQueue-Beta"
       },
       "Type": "AWS::SQS::Queue"
+    },
+    "IdentityPool": {
+      "Type": "AWS::Cognito::IdentityPool",
+      "Properties": {
+        "IdentityPoolName": "my id pool name"
+      }
     }
   }
 }

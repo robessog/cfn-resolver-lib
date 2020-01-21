@@ -30,7 +30,7 @@ const convertNode = (node, nodeAccessor, srcObj, params, convRoot, enableVerbose
     const userDefinedArnSchemas = params["ArnSchemas"] || {};
     const importValueResolvers = params["Fn::ImportValueResolvers"] || {};
     // keeping backward compatibility because of typo in previos versions
-    const refResolvers = params.RefResolvers || params.RefResolevers || {};
+    const refResolvers = params.RefResolvers || params.RefResolevers || params.RefResolveres || {};
     
 
     const arnResolver = new ArnResolver(defaultArnSchemeMap, userDefinedArnSchemas, refResolvers);

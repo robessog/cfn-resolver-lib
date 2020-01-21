@@ -16,7 +16,7 @@ class PropertyConditionNode extends ObjectNode {
             result[this.directDependencies[0].nodeAccessor.key] = this.directDependencies[0].evaluate();
         }
 
-        super.log("Evalulated ConditionNode: " + this.node);
+        super.log("Evalulated PropertyConditionNode: " + this.node);
         super.log(result);
         return result;
     }

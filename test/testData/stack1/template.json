@@ -925,6 +925,14 @@
         }
       },
       "Type": "AWS::SQS::Queue"
+    },
+    "IdentityPool": {
+      "Type": "AWS::Cognito::IdentityPool",
+      "Properties": {
+        "IdentityPoolName": { 
+          "Fn::Join": [ " ", 
+            { "Fn::Split" : [ "-" , "my-id-pool-name" ] } ] }  
+      }
     }
   }
 }
