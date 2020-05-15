@@ -7,7 +7,7 @@ class ResourcesNode extends ObjectNode {
     }
 
     findWrappedResource(resourceLogicalId) {
-        return this.wrappedObject[resourceLogicalId];
+        return this.wrappedObject ? this.wrappedObject[resourceLogicalId] : undefined;
     }
 
     getResolvedArn(resourceLogicalId) {
