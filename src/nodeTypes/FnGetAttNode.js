@@ -14,7 +14,7 @@ class FnGetAttNode extends ArrayNode {
         const resourceLogicalId = this.directDependencies[0].evaluate();
         const attrPath = this.directDependencies[1].evaluate();
 
-        const resource = this.convertedResources.findWrappedResource(resourceLogicalId);
+        const resource = this.convertedResources ? this.convertedResources.findWrappedResource(resourceLogicalId): undefined;
 
         // Handle ARN resolutions if resource is present in the template
         if (attrPath === "Arn" && resource) {
