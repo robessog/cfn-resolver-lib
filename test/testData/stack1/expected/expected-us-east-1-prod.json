@@ -85,6 +85,11 @@
       "Default": "beta",
       "Description": "The stage in the CFN pipeline",
       "Type": "String"
+    },
+    "Fruit": {
+      "Default": "Bananas",
+      "Description": "Favorite kind of fruit",
+      "Type": "String"
     }
   },
   "Resources": {
@@ -410,6 +415,24 @@
       "Type": "AWS::Cognito::IdentityPool",
       "Properties": {
         "IdentityPoolName": "my id pool name"
+      }
+    },
+    "MyDynamoDbTable": {
+      "Type": "AWS::DynamoDB::Table",
+      "Properties": {
+        "TableName": "MyDynamoDbTable-us-east-1-prod"
+      }
+    },
+    "MyDynamoDbTable2": {
+      "Type": "AWS::DynamoDB::Table",
+      "Properties": {
+        "TableName": "MyDynamoDbTable-2"
+      }
+    },
+    "MyDynamoDbTable3": {
+      "Type": "AWS::DynamoDB::Table",
+      "Properties": {
+        "TableName": "MyDynamoDbTable-Oranges"
       }
     }
   }
