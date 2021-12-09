@@ -21,6 +21,17 @@
                 "<node_internals>/**"
             ],
             "program": "${workspaceFolder}/buildUtils/generateRegionsAZMapping.js"
-        }
+        },
+        {            
+            "type": "node",            
+            "request": "launch",            
+            "name": "Mocha all tests",            
+            "program": "${workspaceFolder}/node_modules/mocha/bin/_mocha",            
+            "args": [                            
+               "${workspaceRoot}/test/**/*.test.js"            
+            ],            
+            "cwd": "${workspaceRoot}",   
+            "internalConsoleOptions": "openOnSessionStart"        
+         }
     ]
 }
