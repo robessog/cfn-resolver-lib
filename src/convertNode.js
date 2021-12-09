@@ -29,10 +29,8 @@ const convertNode = (node, nodeAccessor, srcObj, params, convRoot, enableVerbose
     const getAttResolvers = params["Fn::GetAttResolvers"] || {};
     const userDefinedArnSchemas = params["ArnSchemas"] || {};
     const importValueResolvers = params["Fn::ImportValueResolvers"] || {};
-    // keeping backward compatibility because of typo in previos versions
-    const refResolvers = params.RefResolvers || params.RefResolevers || params.RefResolveres || {};
+    const refResolvers = params.refResolvers;
     
-
     const arnResolver = new ArnResolver(defaultArnSchemeMap, userDefinedArnSchemas, refResolvers);
 
     switch (nodeAccessor.key) {
@@ -43,7 +41,7 @@ const convertNode = (node, nodeAccessor, srcObj, params, convRoot, enableVerbose
         case "Fn::Join":
             return new FnJoinNode(node, nodeAccessor, enableVerboseLogging);
         case "Fn::Sub":
-            return new FnSub(node, nodeAccessor, enableVerboseLogging);
+            return new FnSub(node, nodeAccessor, enableVerboseLogging, refResolvers);
         case "Fn::Split":
             return new FnSplit(node, nodeAccessor, enableVerboseLogging);
         case "Fn::Select":
