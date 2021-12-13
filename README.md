@@ -44,6 +44,41 @@ const stackParameters = {
 const resolvedObj = new NodeEvaluator(cloufFormationTemplateDeseralizedObj, stackParameters).evaluateNodes();
 ```
 
+Alternative usage: create NodeEvaluator instance once and reuse multiple times for different parameter sets:
+```js
+const NodeEvaluator = require('cfn-resolver-lib');
+
+const nodeEvaluator = new NodeEvaluator(cloufFormationTemplateDeseralizedObj);
+
+const stackParameters1 = {
+  RefResolvers:
+  {
+      "AWS::Region": "us-west-2",
+      "AWS::Partition": "aws",
+      "AWS::AccountId": "000000111111",
+      "Stage": "prod",
+      "AWS::StackId": "MyEvaluatedFakeStackUsWest2"
+  }
+};
+
+const stackParameters2 = {
+  RefResolvers:
+  {
+      "AWS::Region": "us-east-1",
+      "AWS::Partition": "aws",
+      "AWS::AccountId": "000000112222",
+      "Stage": "beta",
+      "AWS::StackId": "MyEvaluatedFakeStackUsEast1"
+  }
+};
+
+const resolvedObj1 = nodeEvaluator.evaluateNodes(stackParameters1);
+const resolvedObj2 = nodeEvaluator.evaluateNodes(stackParameters2);
+
+```
+
+
+
 ## Extensibility & Customization
 You can pass additional resolver maps to the `NodeEvaluator` instance, just like `RefResolvers` to customize or **override** the built-in behaviour.
 ### Fn::GetAtt resolution

@@ -5,7 +5,8 @@
         "AWS::Partition": "aws",
         "AWS::AccountId": "000000111111",
         "Stage": "prod",
-        "AWS::StackId": "MyEvaluatedFakeStackUsWest2"
+        "AWS::StackId": "MyEvaluatedFakeStackUsWest2",
+        "Fruit": "Apples"
     },
     "Fn::ImportValueResolvers": {
         "RedshiftMainClusterSecurityGroup": "FooSrvRsMainClusterSecurityGroupFakeId",

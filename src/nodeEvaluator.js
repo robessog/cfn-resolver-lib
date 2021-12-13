@@ -1,20 +1,26 @@
 const traverse = require('traverse');
 const { convertNode } = require("./convertNode");
 const { getFieldValueAtWrappedPath } = require('./wrappingHelpers');
-
+const { getParameterDefaults } = require('./parameterHelper');
+ 
 class NodeEvaluator {
-    constructor(srcObj, params, enableVerboseLogging) {
+    constructor(srcObj, params = {}, enableVerboseLogging = false) {
         this.srcObj = srcObj;
         this.params = params || {};
         this.enableVerboseLogging = enableVerboseLogging;
     }
 
-    evaluateNodes() {
+    evaluateNodes(overrideParams = {}) {
         let convRoot = {};
+
+        const theseParams = Object.assign({}, this.params, overrideParams);
+        const defaultRefParams = getParameterDefaults(this.srcObj.Parameters);
+        // keeping backward compatibility because of typo in previos versions
+        theseParams.refResolvers = Object.assign({}, defaultRefParams, theseParams.RefResolevers, theseParams.RefResolveres, theseParams.RefResolvers);
 
         const self = this;
         traverse(this.srcObj).forEach(function (x) {
-            const convNode = convertNode(x, this, self.srcObj, self.params, convRoot, self.enableVerboseLogging);
+            const convNode = convertNode(x, this, self.srcObj, theseParams, convRoot, self.enableVerboseLogging);
             if (this.isRoot) {
                 convRoot = convNode;
             }

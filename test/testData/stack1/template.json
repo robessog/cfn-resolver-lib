@@ -318,6 +318,11 @@
       "Default": "beta",
       "Description": "The stage in the CFN pipeline",
       "Type": "String"
+    },
+    "Fruit": {
+      "Default": "Bananas",
+      "Description": "Favorite kind of fruit",
+      "Type": "String"
     }
   },
   "Resources": {
@@ -932,6 +937,24 @@
         "IdentityPoolName": { 
           "Fn::Join": [ " ", 
             { "Fn::Split" : [ "-" , "my-id-pool-name" ] } ] }  
+      }
+    },
+    "MyDynamoDbTable": {
+      "Type": "AWS::DynamoDB::Table",
+      "Properties": {
+        "TableName": { "Fn::Sub" : "MyDynamoDbTable-${AWS::Region}-${Stage}" }
+      }
+    },
+    "MyDynamoDbTable2": {
+      "Type": "AWS::DynamoDB::Table",
+      "Properties": {
+        "TableName": { "Fn::Sub" : [ "MyDynamoDbTable-${index}", { "index": 2 } ] }
+      }
+    },
+    "MyDynamoDbTable3": {
+      "Type": "AWS::DynamoDB::Table",
+      "Properties": {
+        "TableName": { "Fn::Sub" : "MyDynamoDbTable-${Fruit}" }
       }
     }
   }

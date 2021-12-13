@@ -6,24 +6,29 @@ const ArrayNode = require('./ArrayNode');
 //  - resource attributes
 // https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/intrinsic-function-reference-sub.html
 class FnSub extends ArrayNode {
-    constructor(node, nodeAccessor, enableVerboseLogging) {
+    constructor(node, nodeAccessor, enableVerboseLogging, resolverMap) {
         super(node, nodeAccessor, enableVerboseLogging);
+        this.resolverMap = resolverMap;
     }
 
     evaluate() {
         let result = this.node;
-        if(this.directDependencies.length == 2){
-            let templateStr = this.directDependencies[0].evaluate();
-            const dictionary = this.directDependencies[1].evaluate();
-            for (const key in dictionary) {
-                if (dictionary.hasOwnProperty(key)) {
-                    const element = dictionary[key];
-                    const strToReplace = "${" + key + "}";
-                    // Replace all occurances
-                    templateStr = templateStr.split(strToReplace).join(element);
+        let templateStr;
+        let dictionary = {};
+        if(this.isLeaf) {
+            templateStr = this.node;
+            dictionary = this.resolverMap;
+        } else if (this.directDependencies.length == 2) {
+            templateStr = this.directDependencies[0].evaluate();
+            dictionary = this.directDependencies[1].evaluate();
+        }
+        if(templateStr) {
+            result = templateStr.replace(/\$\{([^}]+)\}/g, function(fullMatch, groupMatch) {
+                if (dictionary.hasOwnProperty(groupMatch)) {
+                    return dictionary[groupMatch];
                 }
-            }
-            result = templateStr;
+                return fullMatch;
+            });
         }
         
         super.log("FnSub evaluated: ");
